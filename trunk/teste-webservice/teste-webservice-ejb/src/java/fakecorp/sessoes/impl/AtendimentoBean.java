@@ -6,6 +6,7 @@
 package fakecorp.sessoes.impl;
 
 import fakecorp.entidades.ChamadaAtendida;
+import fakecorp.sessoes.AtendimentoRemote;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
@@ -18,7 +19,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @WebService
-public class AtendimentoBean implements AtendimentoRemoteBean {
+public class AtendimentoBean implements AtendimentoRemote {
 
     @PersistenceContext
     private EntityManager em;
