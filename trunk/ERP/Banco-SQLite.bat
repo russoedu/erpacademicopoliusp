@@ -1,2 +1,2 @@
 del erp
-manage syncdb --noinput
+manage.py syncdb --noinput
