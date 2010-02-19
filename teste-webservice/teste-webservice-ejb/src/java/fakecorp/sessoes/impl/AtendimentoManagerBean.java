@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package fakecorp.sessoes;
+package fakecorp.sessoes.impl;
 
+import fakecorp.sessoes.AtendimentoManagerLocal;
 import javax.ejb.Stateless;
 
 /**

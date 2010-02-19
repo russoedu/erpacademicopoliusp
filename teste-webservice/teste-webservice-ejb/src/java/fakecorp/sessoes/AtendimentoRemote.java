@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package fakecorp.sessoes.impl;
+package fakecorp.sessoes;
 
 import javax.ejb.Remote;
 
@@ -12,7 +12,7 @@ import javax.ejb.Remote;
  * @author jorge
  */
 @Remote
-public interface AtendimentoRemoteBean {
+public interface AtendimentoRemote {
 
        /**
      * Esse método serve para a execução de uma soma remota para o teste do
