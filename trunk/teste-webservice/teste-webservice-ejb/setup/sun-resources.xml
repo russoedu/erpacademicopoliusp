@@ -11,4 +11,5 @@
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" pool-name="derby_net_sample_appPool" jndi-name="database"  object-type="user"/>
+    <jdbc-resource enabled="true" pool-name="derby_net_sample_appPool" jndi-name="/jdbc/fakecorp"  object-type="user"/>
 </resources>
