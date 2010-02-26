@@ -11,7 +11,8 @@ return array(
         //Módulos "instalados"
         'modules'=>array(
                 'alunos' ,
-                'disciplinas',),
+                'disciplinas',
+                'bibliotecas',),
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -37,8 +38,8 @@ return array(
                         'class'=>'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=erp',
 			//'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => 'root',
+			'username' => 'erp',
+			'password' => 'erp',
 			//'charset' => 'utf8',
 		),
 		
