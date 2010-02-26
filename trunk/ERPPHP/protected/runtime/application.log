@@ -56,3 +56,9 @@ Stack trace:
 #11 C:\Apache\htdocs\framework\base\CApplication.php(135): CWebApplication->processRequest()
 #12 C:\Apache\htdocs\ERPPHP\index-test.php(15): CWebApplication->run()
 REQUEST_URI=/ERPPHP/index-test.php?r=site/index
+2010/02/25 20:06:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "alunos".' in C:\Apache\htdocs\framework\web\CWebApplication.php:324
+Stack trace:
+#0 C:\Apache\htdocs\framework\web\CWebApplication.php(120): CWebApplication->runController('alunos')
+#1 C:\Apache\htdocs\framework\base\CApplication.php(135): CWebApplication->processRequest()
+#2 C:\Apache\htdocs\ERPPHP\index.php(11): CApplication->run()
+#3 {main} REQUEST_URI=/ERPPHP/index.php?r=alunos
