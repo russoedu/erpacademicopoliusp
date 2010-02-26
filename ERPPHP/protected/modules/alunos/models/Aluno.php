@@ -4,6 +4,10 @@ class Aluno extends CActiveRecord
 {
 	/**
 	 * The followings are the available columns in table 'Aluno':
+	 * @var integer $ID
+	 * @var string $firstName
+	 * @var string $lastName
+	 * @var string $email
 	 */
 
 	/**
@@ -31,10 +35,9 @@ class Aluno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                    array('firstName', 'length', 'max' =>50),
-                    array('lastName' ,'length', 'max' =>50),
-                    array('email', 'email'),
-                    array('firstName , lastName , email', 'required'),
+			array('firstName, lastName, email', 'required'),
+			array('firstName, lastName', 'length', 'max'=>50),
+			array('email', 'length', 'max'=>70),
 		);
 	}
 
@@ -55,10 +58,10 @@ class Aluno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-                    'ID' => 'Matricula',
-                    'firstName' => 'First Name',
-                    'lastName' => 'Last Name',
-                    'email' => 'E-mail'
+			'ID' => 'Id',
+			'firstName' => 'First Name',
+			'lastName' => 'Last Name',
+			'email' => 'Email',
 		);
 	}
 }

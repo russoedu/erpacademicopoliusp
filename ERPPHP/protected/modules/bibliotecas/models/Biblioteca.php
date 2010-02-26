@@ -4,6 +4,11 @@ class Biblioteca extends CActiveRecord
 {
 	/**
 	 * The followings are the available columns in table 'Biblioteca':
+	 * @var integer $ID
+	 * @var string $nome
+	 * @var string $local
+	 * @var string $bibliotecario
+	 * @var string $outros
 	 */
 
 	/**
@@ -31,6 +36,8 @@ class Biblioteca extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('nome, local, bibliotecario, outros', 'required'),
+			array('nome, local, bibliotecario, outros', 'length', 'max'=>255),
 		);
 	}
 
@@ -42,6 +49,7 @@ class Biblioteca extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'livros' => array(self::HAS_MANY, 'Livro', 'biblioteca_id'),
 		);
 	}
 
@@ -51,6 +59,11 @@ class Biblioteca extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'ID' => 'Id',
+			'nome' => 'Nome',
+			'local' => 'Local',
+			'bibliotecario' => 'Bibliotecario',
+			'outros' => 'Outros',
 		);
 	}
 }
