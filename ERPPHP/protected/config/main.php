@@ -8,7 +8,10 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'ERP - Modulo Educacional',
-
+        //Módulos "instalados"
+        'modules'=>array(
+                'alunos' ,
+                'disciplinas',),
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -24,19 +27,21 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		'db'=>array(
-			'connectionString' => 'sqlite:protected/data/testdrive.db',
-		),
+//
+//		'db'=>array(
+//			'connectionString' => 'sqlite:protected/data/testdrive.db',
+//		),
 		// uncomment the following to use a MySQL database
-		/*
+		
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
+                        'class'=>'CDbConnection',
+			'connectionString' => 'mysql:host=localhost;dbname=erp',
+			//'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
+			'password' => 'root',
+			//'charset' => 'utf8',
 		),
-		*/
+		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
             'errorAction'=>'site/error',
