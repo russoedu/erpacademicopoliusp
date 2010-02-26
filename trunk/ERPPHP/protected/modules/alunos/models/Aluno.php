@@ -31,6 +31,10 @@ class Aluno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                    array('firstName', 'length', 'max' =>50 ),
+                    array('lastName' , 'length', 'max' =>50),
+                    array('email', 'email'),
+                    array('firstName , lastName , email', 'required'),
 		);
 	}
 
@@ -51,6 +55,10 @@ class Aluno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+                    'ID' => 'Matricula',
+                    'firstName' => 'First Name',
+                    'lastName' => 'Last Name',
+                    'email' => 'E-mail'
 		);
 	}
 }
