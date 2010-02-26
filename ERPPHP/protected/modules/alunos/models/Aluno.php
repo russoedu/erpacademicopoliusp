@@ -31,8 +31,8 @@ class Aluno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                    array('firstName', 'length', 'max' =>50 ),
-                    array('lastName' , 'length', 'max' =>50),
+                    array('firstName', 'length', 'max' =>50),
+                    array('lastName' ,'length', 'max' =>50),
                     array('email', 'email'),
                     array('firstName , lastName , email', 'required'),
 		);

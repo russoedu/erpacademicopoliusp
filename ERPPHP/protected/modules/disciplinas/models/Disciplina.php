@@ -31,6 +31,10 @@ class Disciplina extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+                    array('nome', 'length' , 'max'=>255),
+                    array('sigla', 'length', 'max' =>10),
+                    array('professoresResponsaveis', 'length', 'max' => 100),
+                    array('ementa , nome , sigla , professoresResponsaveis' , 'required'),
 		);
 	}
 
@@ -51,6 +55,10 @@ class Disciplina extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+                    'nome' => 'Nome da Disciplina',
+                    'sigla' => 'Sigla da Disciplina',
+                    'ementa' => 'Ementa da Disciplina',
+                    'professoresResponsaveis' => 'Professores Responsáveis',
 		);
 	}
 }
