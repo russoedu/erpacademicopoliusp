@@ -4,6 +4,9 @@ class Turma extends CActiveRecord
 {
 	/**
 	 * The followings are the available columns in table 'Turma':
+	 * @var integer $ID
+	 * @var string $nome
+	 * @var integer $disciplina_id
 	 */
 
 	/**
@@ -31,9 +34,9 @@ class Turma extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                    array('nome', 'length' , 'max'=>255),
-                    array('nome , disciplina_id', 'required'),
-
+			array('nome, disciplina_id', 'required'),
+			array('disciplina_id', 'numerical', 'integerOnly'=>true),
+			array('nome', 'length', 'max'=>255),
 		);
 	}
 
@@ -45,7 +48,7 @@ class Turma extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'disciplina' => array(self::BELONGS_TO , 'Disciplina' , 'disciplina_id'),
+			'disciplina' => array(self::BELONGS_TO, 'Disciplina', 'disciplina_id'),
 		);
 	}
 
@@ -55,8 +58,9 @@ class Turma extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-                    'nome' => 'Nome da Turma',
-                    'disciplina_id'=>'Disciplina',
+			'ID' => 'Id',
+			'nome' => 'Nome',
+			'disciplina_id' => 'Disciplina',
 		);
 	}
 }
