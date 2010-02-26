@@ -31,6 +31,8 @@
 				array('label'=>'Home', 'url'=>array('/site/index')),
 				array('label'=>'Sobre', 'url'=>array('/site/page', 'view'=>'about')),
 				array('label'=>'Contato', 'url'=>array('/site/contact')),
+                                array('label'=>'Alunos', 'url'=>array('/alunos/aluno')),
+                                array('label'=>'Disciplinas','url'=>array('/disciplinas/disciplina')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
