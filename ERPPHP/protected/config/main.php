@@ -12,7 +12,8 @@ return array(
         'modules'=>array(
                 'alunos' ,
                 'disciplinas',
-                'bibliotecas',),
+                'bibliotecas',
+		'cursos'),
 	// preloading 'log' component
 	'preload'=>array('log'),
 
