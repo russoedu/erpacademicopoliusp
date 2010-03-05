@@ -87,6 +87,32 @@ CREATE TABLE `disciplina` (
 
 
 --
+-- Definition of table `emprestimo`
+--
+
+DROP TABLE IF EXISTS `emprestimo`;
+CREATE TABLE `emprestimo` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `aluno_id` int(10) unsigned NOT NULL,
+  `livro_id` int(10) unsigned NOT NULL,
+  `data_emprestimo` date NOT NULL,
+  `data_combinada` date NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `aluno_id` (`aluno_id`),
+  KEY `livro_id` (`livro_id`),
+  CONSTRAINT `fk_aluno` FOREIGN KEY (`aluno_id`) REFERENCES `aluno` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_livro` FOREIGN KEY (`livro_id`) REFERENCES `livro` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `emprestimo`
+--
+
+/*!40000 ALTER TABLE `emprestimo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emprestimo` ENABLE KEYS */;
+
+
+--
 -- Definition of table `livro`
 --
 
@@ -137,21 +163,22 @@ CREATE TABLE `turma` (
 
 
 --
--- Definition of procedure `TRUNCATEALL`
+-- Definition of procedure `TRUNCATE_ALL`
 --
 
-DROP PROCEDURE IF EXISTS `TRUNCATEALL`;
+DROP PROCEDURE IF EXISTS `TRUNCATE_ALL`;
 
 DELIMITER $$
 
 /*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TRUNCATEALL`()
+CREATE DEFINER=`erp`@`%` PROCEDURE `TRUNCATE_ALL`()
 BEGIN
-Truncate aluno;
-truncate biblioteca;
-truncate disciplina;
-truncate livro;
-truncate turma;
+TRUNCATE emprestimo;
+TRUNCATE livro;
+TRUNCATE aluno;
+TRUNCATE disciplina;
+TRUNCATE turma;
+TRUNCATE biblioteca;
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 
