@@ -33,6 +33,7 @@
 				array('label'=>'Contato', 'url'=>array('/site/contact')),
                                 array('label'=>'Alunos', 'url'=>array('/alunos/aluno')),
                                 array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
+                                array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
                                 array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
                                 array('label'=>'Livros', 'url'=>array('/bibliotecas/livro')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
