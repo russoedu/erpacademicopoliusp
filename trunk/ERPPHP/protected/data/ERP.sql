@@ -154,6 +154,13 @@ CREATE TABLE `turma` (
   CONSTRAINT `FK_disciplina` FOREIGN KEY (`disciplina_id`) REFERENCES `disciplina` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+DROP TABLE IF EXISTS `curso`;
+CREATE TABLE `curso` (
+    `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `nome` varchar(255) NOT NULL,
+    PRIMARY KEY (`ID`)
+);
 --
 -- Dumping data for table `turma`
 --
@@ -179,6 +186,7 @@ TRUNCATE aluno;
 TRUNCATE disciplina;
 TRUNCATE turma;
 TRUNCATE biblioteca;
+TRUNCATE curso;
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 
