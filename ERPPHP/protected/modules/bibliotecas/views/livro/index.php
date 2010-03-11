@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>List Livro</h1>
+<h1>Lista de Livros</h1>
 
 <ul class="actions">
 	<li><?php echo CHtml::link('Create Livro',array('create')); ?></li>

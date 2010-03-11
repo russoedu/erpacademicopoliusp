@@ -40,7 +40,7 @@ class Livro extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, autor, ISDN, numClassfica, editor, ano, local, biblioteca_id', 'required'),
+			array('nome, autor, ISDN, numClassfica, editor, ano, local', 'required'),
 			array('ano, biblioteca_id', 'numerical', 'integerOnly'=>true),
 			array('ISDN', 'numerical'),
 			array('nome, autor, numClassfica, editor, local', 'length', 'max'=>255),
@@ -69,7 +69,7 @@ class Livro extends CActiveRecord
 			'nome' => 'Nome',
 			'autor' => 'Autor',
 			'ISDN' => 'Isdn',
-			'numClassfica' => 'Num Classfica',
+			'numClassfica' => 'Número de Classficação',
 			'editor' => 'Editor',
 			'ano' => 'Ano',
 			'local' => 'Local',

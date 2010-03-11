@@ -48,11 +48,6 @@
 		<?php echo CHtml::error($model,'local'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'biblioteca_id'); ?>
-		<?php echo CHtml::activeTextField($model,'biblioteca_id'); ?>
-		<?php echo CHtml::error($model,'biblioteca_id'); ?>
-	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

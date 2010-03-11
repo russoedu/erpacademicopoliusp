@@ -37,7 +37,8 @@ class Aluno extends CActiveRecord
 		return array(
 			array('firstName, lastName, email', 'required'),
 			array('firstName, lastName', 'length', 'max'=>50),
-			array('email', 'length', 'max'=>70),
+			array('email','length', 'max'=>70),
+                        array('email', 'email'),
 		);
 	}
 

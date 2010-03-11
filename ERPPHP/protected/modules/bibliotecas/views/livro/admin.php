@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
-		'ID',
+		/*'ID',*/
 		'nome',
 		'autor',
 		'ISDN',
