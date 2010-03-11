@@ -35,7 +35,7 @@
                                 array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
                                 array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
                                 array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
-                                array('label'=>'Livros', 'url'=>array('/bibliotecas/livro')),
+                                #array('label'=>'Livros', 'url'=>array('/bibliotecas/livro')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),

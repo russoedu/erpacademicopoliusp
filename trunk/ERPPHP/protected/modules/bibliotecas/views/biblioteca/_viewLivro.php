@@ -1,7 +1,7 @@
 <div class="view">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nome')); ?>:</b>
-	<?php echo CHtml::encode($data->nome, array('view', 'id'=>$data->ID)); ?>
+	<?php echo CHtml::link(CHtml::encode($data->nome), array('/bibliotecas/livro/view', 'id'=>$data->ID)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('autor')); ?>:</b>
@@ -24,12 +24,11 @@
 	<?php echo CHtml::encode($data->ano); ?>
 	<br />
 
-	
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('local')); ?>:</b>
 	<?php echo CHtml::encode($data->local); ?>
 	<br />
-        <?php
-        /*
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('biblioteca_id')); ?>:</b>
 	<?php echo CHtml::encode($data->biblioteca_id); ?>
 	<br />
