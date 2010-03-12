@@ -8,6 +8,6 @@ class disciplinaTest extends CDbTestCase
 
 	public function testCreate()
 	{
-
+ 
 	}
 }
