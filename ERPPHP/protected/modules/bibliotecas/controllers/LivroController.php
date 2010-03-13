@@ -46,9 +46,23 @@ class LivroController extends Controller {
      * Displays a particular model.
      */
     public function actionView() {
+
+        $dataProvider=new CActiveDataProvider('emprestimo', array(
+                        'criteria'=>array(
+                                'condition'=>'id_livro = ' . $_GET['id'] . ' AND data_devolucao > NOW()'
+                        ),
+                )
+        );
+
+        if($dataProvider->getItemCount() == 1)
+            $status="Emprestado";
+        else
+            $status="Disponível";
+
         $this->render('view',array(
-                'model'=>$this->loadModel(),
-        ));
+            'model'=>$this->loadModel(), 'status'=>$status
+        )
+                );
     }
 
     /**

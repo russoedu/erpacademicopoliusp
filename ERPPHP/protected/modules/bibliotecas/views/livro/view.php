@@ -4,28 +4,34 @@ $this->breadcrumbs=array(
 	$model->id_livro,
 );
 ?>
-<h1>View livro #<?php echo $model->id_livro; ?></h1>
+<h1>Livro: <?php echo $model->titulo; ?></h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('List livro',array('index')); ?></li>
-	<li><?php echo CHtml::link('Create livro',array('create')); ?></li>
-	<li><?php echo CHtml::link('Update livro',array('update','id'=>$model->id_livro)); ?></li>
-	<li><?php echo CHtml::linkButton('Delete livro',array('submit'=>array('delete','id'=>$model->id_livro),'confirm'=>'Are you sure to delete this item?')); ?></li>
-	<li><?php echo CHtml::link('Manage livro',array('admin')); ?></li>
+	<li><?php echo CHtml::link('Editar Livro',array('update','id'=>$model->id_livro)); ?></li>
+        <li><?php echo CHtml::linkButton('Remover Livro',array('submit'=>array('delete','id'=>$model->id_livro),'confirm'=>'Deseja realmente remover este livro?')); ?></li>
+        <li><?php echo CHtml::link('Novo Livro',array('create')); ?></li>
+        <li><?php if($status == 'Dísponivel')
+                    echo CHtml::link('Novo Empréstimo',array('/bibliotecas/emprestimo/create','id_livro'=>$model->id_livro)); ?></li>
+
+        <li><?php echo CHtml::link('Listar Livros',array('index')); ?></li>
+	<li><?php echo CHtml::link('Gerenciar Livros',array('admin')); ?></li>
 </ul><!-- actions -->
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_livro',
-		'id_biblioteca',
-		'isbn',
-		'exemplar',
-		'titulo',
-		'autor',
+		'titulo:raw:Título',
+                'autor',
+                'isbn:raw:ISBN',
 		'editora',
 		'ano',
-		'edicao',
+		'edicao:raw:Edição',
+                'exemplar',
 		'local',
+                array(
+                    'label'=>'Status',
+                    'type'=>'raw',
+                    'value'=>$status,
+                    ),
 	),
 )); ?>
