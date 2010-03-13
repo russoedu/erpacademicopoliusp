@@ -1,9 +1,9 @@
 <?php
 
-class AlunoTest extends CDbTestCase
+class alunoTest extends CDbTestCase
 {
 	public $fixtures=array(
-		'alunos'=>'Aluno',
+		'alunos'=>'aluno',
 	);
 
 	public function testCreate()

@@ -7,47 +7,58 @@
 	<?php echo CHtml::errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'nome'); ?>
-		<?php echo CHtml::activeTextField($model,'nome',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo CHtml::error($model,'nome'); ?>
+		<?php echo CHtml::activeLabelEx($model,'id_biblioteca'); ?>
+		<?php echo CHtml::activeTextField($model,'id_biblioteca'); ?>
+		<?php echo CHtml::error($model,'id_biblioteca'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo CHtml::activeLabelEx($model,'isbn'); ?>
+		<?php echo CHtml::activeTextField($model,'isbn'); ?>
+		<?php echo CHtml::error($model,'isbn'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo CHtml::activeLabelEx($model,'exemplar'); ?>
+		<?php echo CHtml::activeTextField($model,'exemplar'); ?>
+		<?php echo CHtml::error($model,'exemplar'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo CHtml::activeLabelEx($model,'titulo'); ?>
+		<?php echo CHtml::activeTextField($model,'titulo',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo CHtml::error($model,'titulo'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'autor'); ?>
-		<?php echo CHtml::activeTextField($model,'autor',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo CHtml::activeTextField($model,'autor',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo CHtml::error($model,'autor'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'ISDN'); ?>
-		<?php echo CHtml::activeTextField($model,'ISDN'); ?>
-		<?php echo CHtml::error($model,'ISDN'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'numClassfica'); ?>
-		<?php echo CHtml::activeTextField($model,'numClassfica',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo CHtml::error($model,'numClassfica'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'editor'); ?>
-		<?php echo CHtml::activeTextField($model,'editor',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo CHtml::error($model,'editor'); ?>
+		<?php echo CHtml::activeLabelEx($model,'editora'); ?>
+		<?php echo CHtml::activeTextField($model,'editora',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo CHtml::error($model,'editora'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'ano'); ?>
-		<?php echo CHtml::activeTextField($model,'ano'); ?>
+		<?php echo CHtml::activeTextField($model,'ano',array('size'=>4,'maxlength'=>4)); ?>
 		<?php echo CHtml::error($model,'ano'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'local'); ?>
-		<?php echo CHtml::activeTextField($model,'local',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo CHtml::error($model,'local'); ?>
+		<?php echo CHtml::activeLabelEx($model,'edicao'); ?>
+		<?php echo CHtml::activeTextField($model,'edicao'); ?>
+		<?php echo CHtml::error($model,'edicao'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo CHtml::activeLabelEx($model,'local'); ?>
+		<?php echo CHtml::activeTextField($model,'local',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo CHtml::error($model,'local'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

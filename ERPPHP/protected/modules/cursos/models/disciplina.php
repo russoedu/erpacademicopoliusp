@@ -4,11 +4,15 @@ class disciplina extends CActiveRecord
 {
 	/**
 	 * The followings are the available columns in table 'disciplina':
-	 * @var integer $ID
+	 * @var integer $id_disciplina
+	 * @var integer $id_curso
+	 * @var integer $id_professor_responsavel
 	 * @var string $nome
 	 * @var string $sigla
-	 * @var string $ementa
-	 * @var string $professoresResponsaveis
+	 * @var integer $creditos_aula
+	 * @var integer $creditos_trabalho
+	 * @var integer $semestre
+	 * @var string $programa
 	 */
 
 	/**
@@ -36,9 +40,11 @@ class disciplina extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, sigla, ementa, professoresResponsaveis', 'required'),
-			array('nome, professoresResponsaveis', 'length', 'max'=>255),
+			array('id_curso, id_professor_responsavel, nome, sigla, creditos_aula, creditos_trabalho, semestre', 'required'),
+			array('id_curso, id_professor_responsavel, creditos_aula, creditos_trabalho, semestre', 'numerical', 'integerOnly'=>true),
+			array('nome', 'length', 'max'=>100),
 			array('sigla', 'length', 'max'=>10),
+			array('programa', 'safe'),
 		);
 	}
 
@@ -50,7 +56,9 @@ class disciplina extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'turmas' => array(self::HAS_MANY, 'Turma', 'disciplina_id'),
+			'id_curso0' => array(self::BELONGS_TO, 'Curso', 'id_curso'),
+			'id_professor_responsavel0' => array(self::BELONGS_TO, 'Professor', 'id_professor_responsavel'),
+			'oferecimentos' => array(self::HAS_MANY, 'Oferecimento', 'id_disciplina'),
 		);
 	}
 
@@ -60,11 +68,15 @@ class disciplina extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'Id',
+			'id_disciplina' => 'Id Disciplina',
+			'id_curso' => 'Id Curso',
+			'id_professor_responsavel' => 'Id Professor Responsavel',
 			'nome' => 'Nome',
 			'sigla' => 'Sigla',
-			'ementa' => 'Ementa',
-			'professoresResponsaveis' => 'Professores Responsaveis',
+			'creditos_aula' => 'Creditos Aula',
+			'creditos_trabalho' => 'Creditos Trabalho',
+			'semestre' => 'Semestre',
+			'programa' => 'Programa',
 		);
 	}
 }

@@ -3,24 +3,26 @@
 return array(
 	/*
 	'sample1'=>array(
-		'nome' => '',
+		'id_biblioteca' => '',
+		'isbn' => '',
+		'exemplar' => '',
+		'titulo' => '',
 		'autor' => '',
-		'ISDN' => '',
-		'numClassfica' => '',
-		'editor' => '',
+		'editora' => '',
 		'ano' => '',
+		'edicao' => '',
 		'local' => '',
-		'biblioteca_id' => '',
 	),
 	'sample2'=>array(
-		'nome' => '',
+		'id_biblioteca' => '',
+		'isbn' => '',
+		'exemplar' => '',
+		'titulo' => '',
 		'autor' => '',
-		'ISDN' => '',
-		'numClassfica' => '',
-		'editor' => '',
+		'editora' => '',
 		'ano' => '',
+		'edicao' => '',
 		'local' => '',
-		'biblioteca_id' => '',
 	),
 	*/
 );

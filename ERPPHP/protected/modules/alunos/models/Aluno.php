@@ -1,13 +1,18 @@
 <?php
 
-class Aluno extends CActiveRecord
+class aluno extends CActiveRecord
 {
 	/**
-	 * The followings are the available columns in table 'Aluno':
-	 * @var integer $ID
-	 * @var string $firstName
-	 * @var string $lastName
+	 * The followings are the available columns in table 'aluno':
+	 * @var integer $id_aluno
+	 * @var string $nome
+	 * @var string $rg
+	 * @var string $cpf
+	 * @var string $endereco
+	 * @var string $telefone
+	 * @var string $celular
 	 * @var string $email
+	 * @var integer $tbl_users_id
 	 */
 
 	/**
@@ -24,7 +29,7 @@ class Aluno extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Aluno';
+		return 'aluno';
 	}
 
 	/**
@@ -35,10 +40,12 @@ class Aluno extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('firstName, lastName, email', 'required'),
-			array('firstName, lastName', 'length', 'max'=>50),
-			array('email','length', 'max'=>70),
-                        array('email', 'email'),
+			array('nome, rg, cpf, endereco, telefone, celular, email, tbl_users_id', 'required'),
+			array('tbl_users_id', 'numerical', 'integerOnly'=>true),
+			array('nome, endereco, email', 'length', 'max'=>100),
+			array('rg', 'length', 'max'=>9),
+			array('cpf', 'length', 'max'=>11),
+			array('telefone, celular', 'length', 'max'=>10),
 		);
 	}
 
@@ -50,6 +57,10 @@ class Aluno extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'tbl_users' => array(self::BELONGS_TO, 'Users', 'tbl_users_id'),
+			'cursos' => array(self::MANY_MANY, 'Curso', 'curso_aluno(id_curso, id_aluno)'),
+			'emprestimos' => array(self::HAS_MANY, 'Emprestimo', 'id_aluno'),
+			'oferecimentos' => array(self::MANY_MANY, 'Oferecimento', 'oferecimento_aluno(id_oferecimento, id_aluno)'),
 		);
 	}
 
@@ -59,10 +70,15 @@ class Aluno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'Id',
-			'firstName' => 'First Name',
-			'lastName' => 'Last Name',
+			'id_aluno' => 'Id Aluno',
+			'nome' => 'Nome',
+			'rg' => 'Rg',
+			'cpf' => 'Cpf',
+			'endereco' => 'Endereco',
+			'telefone' => 'Telefone',
+			'celular' => 'Celular',
 			'email' => 'Email',
+			'tbl_users_id' => 'Tbl Users',
 		);
 	}
 }

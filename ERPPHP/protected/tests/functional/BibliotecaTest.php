@@ -1,9 +1,9 @@
 <?php
 
-class BibliotecaTest extends WebTestCase
+class bibliotecaTest extends WebTestCase
 {
 	public $fixtures=array(
-		'bibliotecas'=>'Biblioteca',
+		'bibliotecas'=>'biblioteca',
 	);
 
 	public function testShow()

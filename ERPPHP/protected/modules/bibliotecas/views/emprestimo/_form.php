@@ -7,27 +7,27 @@
 	<?php echo CHtml::errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'aluno_id'); ?>
-		<?php echo CHtml::activeTextField($model,'aluno_id'); ?>
-		<?php echo CHtml::error($model,'aluno_id'); ?>
+		<?php echo CHtml::activeLabelEx($model,'data_retirada'); ?>
+		<?php echo CHtml::activeTextField($model,'data_retirada'); ?>
+		<?php echo CHtml::error($model,'data_retirada'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'livro_id'); ?>
-		<?php echo CHtml::activeTextField($model,'livro_id'); ?>
-		<?php echo CHtml::error($model,'livro_id'); ?>
+		<?php echo CHtml::activeLabelEx($model,'data_devolucao'); ?>
+		<?php echo CHtml::activeTextField($model,'data_devolucao'); ?>
+		<?php echo CHtml::error($model,'data_devolucao'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'data_emprestimo'); ?>
-		<?php echo CHtml::activeTextField($model,'data_emprestimo'); ?>
-		<?php echo CHtml::error($model,'data_emprestimo'); ?>
+		<?php echo CHtml::activeLabelEx($model,'id_aluno'); ?>
+		<?php echo CHtml::activeTextField($model,'id_aluno'); ?>
+		<?php echo CHtml::error($model,'id_aluno'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'data_combinada'); ?>
-		<?php echo CHtml::activeTextField($model,'data_combinada'); ?>
-		<?php echo CHtml::error($model,'data_combinada'); ?>
+		<?php echo CHtml::activeLabelEx($model,'id_livro'); ?>
+		<?php echo CHtml::activeTextField($model,'id_livro'); ?>
+		<?php echo CHtml::error($model,'id_livro'); ?>
 	</div>
 
 	<div class="row buttons">

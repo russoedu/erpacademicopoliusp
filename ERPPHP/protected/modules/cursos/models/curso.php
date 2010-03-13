@@ -4,8 +4,11 @@ class curso extends CActiveRecord
 {
 	/**
 	 * The followings are the available columns in table 'curso':
-	 * @var integer $ID
+	 * @var integer $id_curso
 	 * @var string $nome
+	 * @var integer $duracao
+	 * @var string $periodo
+	 * @var string $descricao
 	 */
 
 	/**
@@ -33,8 +36,11 @@ class curso extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome', 'required'),
-			array('nome', 'length', 'max'=>255),
+			array('nome, duracao, periodo', 'required'),
+			array('duracao', 'numerical', 'integerOnly'=>true),
+			array('nome', 'length', 'max'=>100),
+			array('periodo', 'length', 'max'=>15),
+			array('descricao', 'safe'),
 		);
 	}
 
@@ -46,6 +52,8 @@ class curso extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'alunos' => array(self::MANY_MANY, 'Aluno', 'curso_aluno(id_curso, id_aluno)'),
+			'disciplinas' => array(self::HAS_MANY, 'Disciplina', 'id_curso'),
 		);
 	}
 
@@ -55,8 +63,11 @@ class curso extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'Id',
+			'id_curso' => 'Id Curso',
 			'nome' => 'Nome',
+			'duracao' => 'Duracao',
+			'periodo' => 'Periodo',
+			'descricao' => 'Descricao',
 		);
 	}
 }

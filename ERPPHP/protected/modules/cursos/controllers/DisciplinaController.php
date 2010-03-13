@@ -66,7 +66,7 @@ class DisciplinaController extends Controller
 		{
 			$model->attributes=$_POST['disciplina'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->id_disciplina));
 		}
 
 		$this->render('create',array(
@@ -85,7 +85,7 @@ class DisciplinaController extends Controller
 		{
 			$model->attributes=$_POST['disciplina'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->id_disciplina));
 		}
 
 		$this->render('update',array(

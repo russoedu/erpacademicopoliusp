@@ -1,9 +1,9 @@
 <?php
 
-class BibliotecaTest extends CDbTestCase
+class bibliotecaTest extends CDbTestCase
 {
 	public $fixtures=array(
-		'bibliotecas'=>'Biblioteca',
+		'bibliotecas'=>'biblioteca',
 	);
 
 	public function testCreate()

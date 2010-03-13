@@ -61,12 +61,12 @@ class AlunoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Aluno;
-		if(isset($_POST['Aluno']))
+		$model=new aluno;
+		if(isset($_POST['aluno']))
 		{
-			$model->attributes=$_POST['Aluno'];
+			$model->attributes=$_POST['aluno'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->id_aluno));
 		}
 
 		$this->render('create',array(
@@ -81,11 +81,11 @@ class AlunoController extends Controller
 	public function actionUpdate()
 	{
 		$model=$this->loadModel();
-		if(isset($_POST['Aluno']))
+		if(isset($_POST['aluno']))
 		{
-			$model->attributes=$_POST['Aluno'];
+			$model->attributes=$_POST['aluno'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->id_aluno));
 		}
 
 		$this->render('update',array(
@@ -117,7 +117,7 @@ class AlunoController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Aluno', array(
+		$dataProvider=new CActiveDataProvider('aluno', array(
 			'pagination'=>array(
 				'pageSize'=>self::PAGE_SIZE,
 			),
@@ -133,7 +133,7 @@ class AlunoController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$dataProvider=new CActiveDataProvider('Aluno', array(
+		$dataProvider=new CActiveDataProvider('aluno', array(
 			'pagination'=>array(
 				'pageSize'=>self::PAGE_SIZE,
 			),
@@ -153,7 +153,7 @@ class AlunoController extends Controller
 		if($this->_model===null)
 		{
 			if(isset($_GET['id']))
-				$this->_model=Aluno::model()->findbyPk($_GET['id']);
+				$this->_model=aluno::model()->findbyPk($_GET['id']);
 			if($this->_model===null)
 				throw new CHttpException(404,'The requested page does not exist.');
 		}

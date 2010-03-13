@@ -3,14 +3,24 @@
 return array(
 	/*
 	'sample1'=>array(
-		'firstName' => '',
-		'lastName' => '',
+		'nome' => '',
+		'rg' => '',
+		'cpf' => '',
+		'endereco' => '',
+		'telefone' => '',
+		'celular' => '',
 		'email' => '',
+		'tbl_users_id' => '',
 	),
 	'sample2'=>array(
-		'firstName' => '',
-		'lastName' => '',
+		'nome' => '',
+		'rg' => '',
+		'cpf' => '',
+		'endereco' => '',
+		'telefone' => '',
+		'celular' => '',
 		'email' => '',
+		'tbl_users_id' => '',
 	),
 	*/
 );
