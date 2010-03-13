@@ -38,7 +38,7 @@ CREATE TABLE `aluno` (
   `tbl_users_id` int(11) NOT NULL,
   PRIMARY KEY (`id_aluno`),
   KEY `fk_Aluno_tbl_users1` (`tbl_users_id`),
-  CONSTRAINT `fk_Aluno_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `tbl_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Aluno_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -80,7 +80,7 @@ CREATE TABLE `bibliotecario` (
   `tbl_users_id` int(11) NOT NULL,
   PRIMARY KEY (`id_bibliotecario`),
   KEY `fk_Bibliotecario_tbl_users1` (`tbl_users_id`),
-  CONSTRAINT `fk_Bibliotecario_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `tbl_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Bibliotecario_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `gestoracademico` (
   `tbl_users_id` int(11) NOT NULL,
   PRIMARY KEY (`id_gestor_academico`),
   KEY `fk_AdminAcademico_tbl_users1` (`tbl_users_id`),
-  CONSTRAINT `fk_AdminAcademico_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `tbl_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_AdminAcademico_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -338,7 +338,7 @@ CREATE TABLE `professor` (
   `tbl_users_id` int(11) NOT NULL,
   PRIMARY KEY (`id_professor`),
   KEY `fk_Professor_tbl_users1` (`tbl_users_id`),
-  CONSTRAINT `fk_Professor_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `tbl_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Professor_tbl_users1` FOREIGN KEY (`tbl_users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -350,11 +350,11 @@ CREATE TABLE `professor` (
 
 
 --
--- Definition of table `tbl_profiles`
+-- Definition of table `profiles`
 --
 
-DROP TABLE IF EXISTS `tbl_profiles`;
-CREATE TABLE `tbl_profiles` (
+DROP TABLE IF EXISTS `profiles`;
+CREATE TABLE `profiles` (
   `user_id` int(11) NOT NULL,
   `lastname` varchar(50) NOT NULL DEFAULT '',
   `firstname` varchar(50) NOT NULL DEFAULT '',
@@ -363,21 +363,21 @@ CREATE TABLE `tbl_profiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tbl_profiles`
+-- Dumping data for table `profiles`
 --
 
-/*!40000 ALTER TABLE `tbl_profiles` DISABLE KEYS */;
-INSERT INTO `tbl_profiles` VALUES  (1,'Admin','Administrator',''),
+/*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES  (1,'Admin','Administrator',''),
  (2,'Demo','Demo','');
-/*!40000 ALTER TABLE `tbl_profiles` ENABLE KEYS */;
+/*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 
 
 --
--- Definition of table `tbl_profiles_fields`
+-- Definition of table `profiles_fields`
 --
 
-DROP TABLE IF EXISTS `tbl_profiles_fields`;
-CREATE TABLE `tbl_profiles_fields` (
+DROP TABLE IF EXISTS `profiles_fields`;
+CREATE TABLE `profiles_fields` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `varname` varchar(50) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -397,22 +397,22 @@ CREATE TABLE `tbl_profiles_fields` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tbl_profiles_fields`
+-- Dumping data for table `profiles_fields`
 --
 
-/*!40000 ALTER TABLE `tbl_profiles_fields` DISABLE KEYS */;
-INSERT INTO `tbl_profiles_fields` VALUES  (1,'lastname','Last Name','INT',50,3,1,'','','Incorrect Last Name (length between 3 and 50 characters).','','',1,3),
+/*!40000 ALTER TABLE `profiles_fields` DISABLE KEYS */;
+INSERT INTO `profiles_fields` VALUES  (1,'lastname','Last Name','INT',50,3,1,'','','Incorrect Last Name (length between 3 and 50 characters).','','',1,3),
  (2,'firstname','First Name','INT',50,3,1,'','','Incorrect First Name (length between 3 and 50 characters).','','',0,3),
  (3,'about','About me','TEXT',1500,0,0,'','','','','',10,0);
-/*!40000 ALTER TABLE `tbl_profiles_fields` ENABLE KEYS */;
+/*!40000 ALTER TABLE `profiles_fields` ENABLE KEYS */;
 
 
 --
--- Definition of table `tbl_users`
+-- Definition of table `users`
 --
 
-DROP TABLE IF EXISTS `tbl_users`;
-CREATE TABLE `tbl_users` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -430,13 +430,13 @@ CREATE TABLE `tbl_users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tbl_users`
+-- Dumping data for table `users`
 --
 
-/*!40000 ALTER TABLE `tbl_users` DISABLE KEYS */;
-INSERT INTO `tbl_users` VALUES  (1,'admin','21232f297a57a5a743894a0e4a801fc3','webmaster@example.com','9a24eff8c15a6a141ece27eb6947da0f',1261146094,1268481798,1,1),
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES  (1,'admin','21232f297a57a5a743894a0e4a801fc3','webmaster@example.com','9a24eff8c15a6a141ece27eb6947da0f',1261146094,1268486985,1,1),
  (2,'demo','fe01ce2a7fbac8fafaed7c982a04e229','demo@example.com','099f825543f7850cc038b90aaff39fac',1261146094,1261146094,0,1);
-/*!40000 ALTER TABLE `tbl_users` ENABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
 
