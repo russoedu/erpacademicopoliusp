@@ -1,18 +1,19 @@
 <?php
 
-class Livro extends CActiveRecord
+class livro extends CActiveRecord
 {
 	/**
-	 * The followings are the available columns in table 'Livro':
-	 * @var integer $ID
-	 * @var string $nome
+	 * The followings are the available columns in table 'livro':
+	 * @var integer $id_livro
+	 * @var integer $id_biblioteca
+	 * @var integer $isbn
+	 * @var integer $exemplar
+	 * @var string $titulo
 	 * @var string $autor
-	 * @var double $ISDN
-	 * @var string $numClassfica
-	 * @var string $editor
-	 * @var integer $ano
+	 * @var string $editora
+	 * @var string $ano
+	 * @var integer $edicao
 	 * @var string $local
-	 * @var integer $biblioteca_id
 	 */
 
 	/**
@@ -29,7 +30,7 @@ class Livro extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'Livro';
+		return 'livro';
 	}
 
 	/**
@@ -40,10 +41,12 @@ class Livro extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, autor, ISDN, numClassfica, editor, ano, local', 'required'),
-			array('ano, biblioteca_id', 'numerical', 'integerOnly'=>true),
-			array('ISDN', 'numerical'),
-			array('nome, autor, numClassfica, editor, local', 'length', 'max'=>255),
+			array('id_biblioteca, isbn, exemplar, titulo, autor, editora, ano, edicao, local', 'required'),
+			array('id_biblioteca, isbn, exemplar, edicao', 'numerical', 'integerOnly'=>true),
+			array('titulo, autor', 'length', 'max'=>100),
+			array('editora', 'length', 'max'=>45),
+			array('ano', 'length', 'max'=>4),
+			array('local', 'length', 'max'=>10),
 		);
 	}
 
@@ -55,7 +58,8 @@ class Livro extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'biblioteca' => array(self::BELONGS_TO, 'Biblioteca', 'biblioteca_id'),
+			'emprestimos' => array(self::HAS_MANY, 'Emprestimo', 'id_livro'),
+			'id_biblioteca0' => array(self::BELONGS_TO, 'Biblioteca', 'id_biblioteca'),
 		);
 	}
 
@@ -65,15 +69,16 @@ class Livro extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'Id',
-			'nome' => 'Nome',
+			'id_livro' => 'Id Livro',
+			'id_biblioteca' => 'Id Biblioteca',
+			'isbn' => 'Isbn',
+			'exemplar' => 'Exemplar',
+			'titulo' => 'Titulo',
 			'autor' => 'Autor',
-			'ISDN' => 'Isdn',
-			'numClassfica' => 'Número de Classficação',
-			'editor' => 'Editor',
+			'editora' => 'Editora',
 			'ano' => 'Ano',
+			'edicao' => 'Edicao',
 			'local' => 'Local',
-			'biblioteca_id' => 'Biblioteca',
 		);
 	}
 }

@@ -3,16 +3,16 @@
 return array(
 	/*
 	'sample1'=>array(
-		'aluno_id' => '',
-		'livro_id' => '',
-		'data_emprestimo' => '',
-		'data_combinada' => '',
+		'data_retirada' => '',
+		'data_devolucao' => '',
+		'id_aluno' => '',
+		'id_livro' => '',
 	),
 	'sample2'=>array(
-		'aluno_id' => '',
-		'livro_id' => '',
-		'data_emprestimo' => '',
-		'data_combinada' => '',
+		'data_retirada' => '',
+		'data_devolucao' => '',
+		'id_aluno' => '',
+		'id_livro' => '',
 	),
 	*/
 );

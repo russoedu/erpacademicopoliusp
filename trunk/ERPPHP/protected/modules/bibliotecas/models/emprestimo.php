@@ -4,11 +4,11 @@ class emprestimo extends CActiveRecord
 {
 	/**
 	 * The followings are the available columns in table 'emprestimo':
-	 * @var integer $ID
-	 * @var integer $aluno_id
-	 * @var integer $livro_id
-	 * @var string $data_emprestimo
-	 * @var string $data_combinada
+	 * @var integer $id_emprestimo
+	 * @var string $data_retirada
+	 * @var string $data_devolucao
+	 * @var integer $id_aluno
+	 * @var integer $id_livro
 	 */
 
 	/**
@@ -36,8 +36,8 @@ class emprestimo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('aluno_id, livro_id, data_emprestimo, data_combinada', 'required'),
-			array('aluno_id, livro_id', 'numerical', 'integerOnly'=>true),
+			array('data_retirada, data_devolucao, id_aluno, id_livro', 'required'),
+			array('id_aluno, id_livro', 'numerical', 'integerOnly'=>true),
 		);
 	}
 
@@ -49,8 +49,8 @@ class emprestimo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'aluno' => array(self::BELONGS_TO, 'Aluno', 'aluno_id'),
-			'livro' => array(self::BELONGS_TO, 'Livro', 'livro_id'),
+			'id_aluno0' => array(self::BELONGS_TO, 'Aluno', 'id_aluno'),
+			'id_livro0' => array(self::BELONGS_TO, 'Livro', 'id_livro'),
 		);
 	}
 
@@ -60,11 +60,11 @@ class emprestimo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'Id',
-			'aluno_id' => 'Aluno',
-			'livro_id' => 'Livro',
-			'data_emprestimo' => 'Data Emprestimo',
-			'data_combinada' => 'Data Combinada',
+			'id_emprestimo' => 'Id Emprestimo',
+			'data_retirada' => 'Data Retirada',
+			'data_devolucao' => 'Data Devolucao',
+			'id_aluno' => 'Id Aluno',
+			'id_livro' => 'Id Livro',
 		);
 	}
 }

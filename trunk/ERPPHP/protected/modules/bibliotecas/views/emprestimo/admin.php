@@ -14,11 +14,11 @@ $this->breadcrumbs=array(
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
-		'ID',
-		'aluno_id',
-		'livro_id',
-		'data_emprestimo',
-		'data_combinada',
+		'id_emprestimo',
+		'data_retirada',
+		'data_devolucao',
+		'id_aluno',
+		'id_livro',
 		array(
 			'class'=>'CButtonColumn',
 		),

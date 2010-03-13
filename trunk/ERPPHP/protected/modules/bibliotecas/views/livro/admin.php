@@ -7,23 +7,24 @@ $this->breadcrumbs=array(
 <h1>Manage Livros</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('List Livro',array('index')); ?></li>
-	<li><?php echo CHtml::link('Create Livro',array('create')); ?></li>
+	<li><?php echo CHtml::link('List livro',array('index')); ?></li>
+	<li><?php echo CHtml::link('Create livro',array('create')); ?></li>
 </ul><!-- actions -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
-		/*'ID',*/
-		'nome',
+		'id_livro',
+		'id_biblioteca',
+		'isbn',
+		'exemplar',
+		'titulo',
 		'autor',
-		'ISDN',
-		'numClassfica',
-		'editor',
 		/*
+		'editora',
 		'ano',
+		'edicao',
 		'local',
-		'biblioteca_id',
 		*/
 		array(
 			'class'=>'CButtonColumn',

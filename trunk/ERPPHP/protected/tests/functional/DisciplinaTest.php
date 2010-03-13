@@ -1,9 +1,9 @@
 <?php
 
-class DisciplinaTest extends WebTestCase
+class disciplinaTest extends WebTestCase
 {
 	public $fixtures=array(
-		'disciplinas'=>'Disciplina',
+		'disciplinas'=>'disciplina',
 	);
 
 	public function testShow()
