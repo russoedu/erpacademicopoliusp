@@ -6,11 +6,6 @@
 
 	<?php echo CHtml::errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'id_biblioteca'); ?>
-		<?php echo CHtml::activeTextField($model,'id_biblioteca'); ?>
-		<?php echo CHtml::error($model,'id_biblioteca'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'isbn'); ?>

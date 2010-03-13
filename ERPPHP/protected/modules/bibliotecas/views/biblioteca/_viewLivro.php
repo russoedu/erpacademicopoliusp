@@ -1,27 +1,23 @@
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nome')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->nome), array('/bibliotecas/livro/view', 'id'=>$data->ID)); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('Titulo')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->titulo), array('/bibliotecas/livro/view', 'id'=>$data->id_livro)); ?>
+	<br />
+
+		<b><?php echo CHtml::encode($data->getAttributeLabel('isbn')); ?>:</b>
+	<?php echo CHtml::encode($data->isbn); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('exemplar')); ?>:</b>
+	<?php echo CHtml::encode($data->exemplar); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('autor')); ?>:</b>
 	<?php echo CHtml::encode($data->autor); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ISDN')); ?>:</b>
-	<?php echo CHtml::encode($data->ISDN); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('numClassfica')); ?>:</b>
-	<?php echo CHtml::encode($data->numClassfica); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('editor')); ?>:</b>
-	<?php echo CHtml::encode($data->editor); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ano')); ?>:</b>
-	<?php echo CHtml::encode($data->ano); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('editora')); ?>:</b>
+	<?php echo CHtml::encode($data->editora); ?>
 	<br />
 
 	<?php /*
