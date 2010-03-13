@@ -8,7 +8,8 @@ $this->breadcrumbs=array(
 
 <ul class="actions">
 	<li><?php echo CHtml::link('List biblioteca',array('index')); ?></li>
-        <li><?php echo CHtml::link('Adcionar livro', array('/bibliotecas/livro/create','bib'=>$model->id_biblioteca));?>
+        <li><?php echo CHtml::link('Adicionar livro', array('/bibliotecas/livro/create','bib'=>$model->id_biblioteca));?></li>
+        <li><?php echo CHtml::link('Empréstimos', array('/bibliotecas/emprestimo/index','bib'=>$model->id_biblioteca));?></li>
 	<li><?php echo CHtml::link('Create biblioteca',array('create')); ?></li>
 	<li><?php echo CHtml::link('Update biblioteca',array('update','id'=>$model->id_biblioteca)); ?></li>
 	<li><?php echo CHtml::linkButton('Delete biblioteca',array('submit'=>array('delete','id'=>$model->id_biblioteca),'confirm'=>'Are you sure to delete this item?')); ?></li>
