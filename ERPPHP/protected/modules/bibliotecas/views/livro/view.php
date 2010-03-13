@@ -1,7 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Livros'=>array('index'),
-	$model->id_livro,
+	'Biliotecas'=>array('/bibliotecas/biblioteca/index'),
+        $biblioteca->nome=>array('/bibliotecas/biblioteca/view' , 'id'=>$biblioteca->id_biblioteca),
+	$model->titulo,
 );
 ?>
 <h1>Livro: <?php echo $model->titulo; ?></h1>

@@ -1,10 +1,10 @@
 <?php
 $this->breadcrumbs=array(
 	'Bibliotecas'=>array('index'),
-	$model->id_biblioteca,
+	$model->nome,
 );
 ?>
-<h1>View biblioteca #<?php echo $model->id_biblioteca; ?></h1>
+<h1>View biblioteca #<?php echo $model->nome; ?></h1>
 
 <ul class="actions">
 	<li><?php echo CHtml::link('List biblioteca',array('index')); ?></li>
@@ -19,14 +19,19 @@ $this->breadcrumbs=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_biblioteca',
+		#'id_biblioteca',
 		'nome',
 		'local',
 	),
 )); ?>
 
-<?php $this->widget('zii.widgets.CListView' , array(
+<?php
+    if ($dataProvider->itemCount > 0){
+    $this->widget('zii.widgets.CListView' , array(
     'dataProvider'=>$dataProvider,
     'itemView'=>'_viewLivro',
-));
+));}
+    else
+        echo 'Nenhum livro cadastrado na biblioteca';
+?>
 
