@@ -54,13 +54,17 @@ class LivroController extends Controller {
                 )
         );
 
+        $model = $this->loadModel();
+        $biblioteca = biblioteca::model()->findByPk($model->id_biblioteca);
+
         if($dataProvider->getItemCount() == 1)
             $status="Emprestado";
         else
             $status="Disponível";
 
         $this->render('view',array(
-            'model'=>$this->loadModel(), 'status'=>$status
+            'model'=>$model, 'status'=>$status
+            ,'biblioteca'=>$biblioteca,
         )
                 );
     }
