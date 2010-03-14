@@ -43,6 +43,7 @@ class aluno extends CActiveRecord
 			array('nome, rg, cpf, endereco, telefone, celular, email, tbl_users_id', 'required'),
 			array('tbl_users_id', 'numerical', 'integerOnly'=>true),
 			array('nome, endereco, email', 'length', 'max'=>100),
+                        array('email', 'email'),
 			array('rg', 'length', 'max'=>9),
 			array('cpf', 'length', 'max'=>11),
 			array('telefone, celular', 'length', 'max'=>10),

@@ -48,11 +48,6 @@
 		<?php echo CHtml::error($model,'email'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'tbl_users_id'); ?>
-		<?php echo CHtml::activeTextField($model,'tbl_users_id'); ?>
-		<?php echo CHtml::error($model,'tbl_users_id'); ?>
-	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
