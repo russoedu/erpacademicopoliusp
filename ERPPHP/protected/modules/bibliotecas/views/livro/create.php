@@ -1,10 +1,10 @@
 <?php
 $this->breadcrumbs=array(
 	'Livros'=>array('index'),
-	'Create',
+	'Novo',
 );
 ?>
-<h1>Create livro</h1>
+<h1>Novo Livro</h1>
 
 <ul class="actions">
 	<li><?php echo CHtml::link('List livro',array('index')); ?></li>

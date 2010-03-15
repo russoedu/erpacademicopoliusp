@@ -10,10 +10,11 @@ $this->breadcrumbs=array(
 <ul class="actions">
 	<li><?php echo CHtml::link('Editar Livro',array('update','id'=>$model->id_livro)); ?></li>
         <li><?php echo CHtml::linkButton('Remover Livro',array('submit'=>array('delete','id'=>$model->id_livro),'confirm'=>'Deseja realmente remover este livro?')); ?></li>
-        <li><?php echo CHtml::link('Novo Livro',array('create')); ?></li>
-        <li><?php if($status == 'Dísponivel')
-                    echo CHtml::link('Novo Empréstimo',array('/bibliotecas/emprestimo/create','id_livro'=>$model->id_livro)); ?></li>
-
+        <!--<li><?php echo CHtml::link('Novo Livro',array('create')); ?></li>-->
+        <li><?php if($status == 'Disponível')
+                    echo CHtml::link('Novo Empréstimo',array('/bibliotecas/emprestimo/create','id_livro'=>$model->id_livro));
+                  else
+                    echo CHtml::link('Renovar Empréstimo',array('/bibliotecas/emprestimo/update','id_livro'=>$model->id_livro)); ?></li>
         <li><?php echo CHtml::link('Listar Livros',array('index')); ?></li>
 	<li><?php echo CHtml::link('Gerenciar Livros',array('admin')); ?></li>
 </ul><!-- actions -->
