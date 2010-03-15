@@ -1,10 +1,10 @@
 <?php
 $this->breadcrumbs=array(
 	'Emprestimos'=>array('index'),
-	'Create',
+	'Novo',
 );
 ?>
-<h1>Create emprestimo</h1>
+<h1>Novo Empréstimo - Livro</h1>
 
 <ul class="actions">
 	<li><?php echo CHtml::link('List emprestimo',array('index')); ?></li>

@@ -61,17 +61,22 @@ class EmprestimoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new emprestimo;
-		if(isset($_POST['emprestimo']))
-		{
-			$model->attributes=$_POST['emprestimo'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_emprestimo));
-		}
-
-		$this->render('create',array(
-			'model'=>$model,
-		));
+            $id_livro = $_REQUEST['id_livro'];
+            $model=new emprestimo;
+            $emprestimo = Array();
+            if(isset($_POST['emprestimo']))
+            {
+                $emprestimo = $_POST['emprestimo'];
+                $emprestimo['id_livro'] = $id_livro;
+                $model->attributes=$emprestimo;
+                
+                if($model->save())
+			$this->redirect(array('view','id'=>$model->id_emprestimo));
+            }
+            
+            $this->render('create',array(
+                'model'=>$model,
+            ));
 	}
 
 	/**

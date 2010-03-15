@@ -84,7 +84,7 @@ class LivroController extends Controller {
             if($model->save())
                 $this->redirect(array('view','id'=>$model->id_livro));
         }
-
+        echo $model->id_biblioteca;
         $this->render('create',array(
                 'model'=>$model,
         ));
