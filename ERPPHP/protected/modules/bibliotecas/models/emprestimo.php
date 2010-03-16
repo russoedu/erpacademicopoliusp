@@ -9,6 +9,7 @@ class emprestimo extends CActiveRecord
 	 * @var string $data_devolucao
 	 * @var integer $id_aluno
 	 * @var integer $id_livro
+         * @var string $data_devolucao_efetiva
 	 */
 
 	/**
@@ -65,6 +66,7 @@ class emprestimo extends CActiveRecord
 			'data_devolucao' => 'Data Devolucao',
 			'id_aluno' => 'Id Aluno',
 			'id_livro' => 'Id Livro',
+                        'data_devolucao_efetiva' => 'Data Devolucao Efetiva',
 		);
 	}
 }

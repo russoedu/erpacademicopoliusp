@@ -49,7 +49,7 @@ class LivroController extends Controller {
 
         $dataProvider=new CActiveDataProvider('emprestimo', array(
                         'criteria'=>array(
-                                'condition'=>'id_livro = ' . $_GET['id'] . ' AND data_devolucao > NOW()'
+                                'condition'=>'id_livro = ' . $_GET['id'] . ' AND data_devolucao_efetiva is null'
                         ),
                 )
         );
@@ -57,7 +57,7 @@ class LivroController extends Controller {
         $model = $this->loadModel();
         $biblioteca = biblioteca::model()->findByPk($model->id_biblioteca);
 
-        if($dataProvider->getItemCount() == 1)
+        if($dataProvider->getItemCount() >= 1)
             $status="Emprestado";
         else
             $status="Disponível";
