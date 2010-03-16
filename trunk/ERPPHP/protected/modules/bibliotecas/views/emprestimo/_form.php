@@ -5,14 +5,13 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo CHtml::errorSummary($model); ?>
-
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'data_retirada'); ?>
-                <?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                <?php $model->data_retirada=date('d m y');
+                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                 'model'=>$model,
                                 'attribute'=>'data_retirada',
                                 'language'=>'pt-br',
-                                'value'=>date('dd/MM/yyyy'),
                                 'options'=>array(
                                     'showAnim'=>'fold',
                                     ),
@@ -27,7 +26,10 @@
 
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'data_devolucao'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+		<?php $today = date("Y-m-d");// current date
+                    $nextweek = date("Y-m-d",strtotime(date("Y-m-d", strtotime($today)) . " +7 days"));
+                    $model->data_devolucao = $nextweek;
+                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                 'model'=>$model,
                                 'attribute'=>'data_devolucao',
                                 'language'=>'pt-br',

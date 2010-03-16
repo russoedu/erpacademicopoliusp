@@ -68,12 +68,13 @@ class EmprestimoController extends Controller
             {
                 $emprestimo = $_POST['emprestimo'];
                 $emprestimo['id_livro'] = $id_livro;
+                $emprestimo['data_retirada'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_retirada'])));
+                $emprestimo['data_devolucao'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_devolucao'])));
                 $model->attributes=$emprestimo;
                 
                 if($model->save())
 			$this->redirect(array('view','id'=>$model->id_emprestimo));
             }
-            
             $this->render('create',array(
                 'model'=>$model,
             ));
