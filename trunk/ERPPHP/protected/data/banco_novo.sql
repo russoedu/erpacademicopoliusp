@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.1.44-community
@@ -182,6 +182,7 @@ CREATE TABLE `emprestimo` (
   `data_devolucao` date NOT NULL,
   `id_aluno` int(11) NOT NULL,
   `id_livro` int(11) NOT NULL,
+  `data_devolucao_efetiva` date DEFAULT NULL,
   PRIMARY KEY (`id_emprestimo`),
   KEY `fk_Emprestimo_Aluno` (`id_aluno`),
   KEY `fk_Emprestimo_Livro1` (`id_livro`),

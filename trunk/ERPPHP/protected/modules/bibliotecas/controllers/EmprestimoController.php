@@ -70,6 +70,7 @@ class EmprestimoController extends Controller
                 $emprestimo['id_livro'] = $id_livro;
                 $emprestimo['data_retirada'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_retirada'])));
                 $emprestimo['data_devolucao'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_devolucao'])));
+                
                 $model->attributes=$emprestimo;
                 
                 if($model->save())
@@ -86,7 +87,15 @@ class EmprestimoController extends Controller
 	 */
 	public function actionUpdate()
 	{
-		$model=$this->loadModel();
+                $id_livro = $_REQUEST['id_livro'];
+
+                $condition = 'id_livro = :idLivro AND data_devolucao_efetiva is null';
+                $params = Array(':idLivro'=>$id_livro);
+
+                $emprestimo = emprestimo::model()->find($condition, $params);
+
+		$model=$emprestimo;
+                
 		if(isset($_POST['emprestimo']))
 		{
 			$model->attributes=$_POST['emprestimo'];
