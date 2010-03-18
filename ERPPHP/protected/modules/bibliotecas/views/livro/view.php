@@ -15,8 +15,6 @@ $this->breadcrumbs=array(
                     echo CHtml::link('Emprestar Livro',array('/bibliotecas/emprestimo/create','id_livro'=>$model->id_livro));
                   else
                     echo CHtml::link('Renovar Empréstimo',array('/bibliotecas/emprestimo/update','id_livro'=>$model->id_livro)); ?></li>
-        <li><?php if($status == 'Emprestado')
-                    echo Chtml::link('Reportar Devolução',array('/bibliotecas/emprestimo/bookReturn', 'id_livro'=>$model->id_livro)); ?></li>
         <li><?php echo CHtml::link('Listar Livros',array('index')); ?></li>
 	<li><?php echo CHtml::link('Gerenciar Livros',array('admin')); ?></li>
 </ul><!-- actions -->

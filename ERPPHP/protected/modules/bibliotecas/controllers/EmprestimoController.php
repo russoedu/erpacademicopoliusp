@@ -32,7 +32,7 @@ class EmprestimoController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','reportreturn'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -89,24 +89,41 @@ class EmprestimoController extends Controller
 	{
                 $id_livro = $_REQUEST['id_livro'];
 
-                $condition = 'id_livro = :idLivro AND data_devolucao_efetiva is null';
-                $params = Array(':idLivro'=>$id_livro);
+                $model = emprestimo::model()->find('id_livro = :idLivro AND data_devolucao_efetiva is null', Array (':idLivro'=>$id_livro));
 
-                $emprestimo = emprestimo::model()->find($condition, $params);
+                $aluno = Aluno::model()->findByPk($model->id_aluno);
 
-		$model=$emprestimo;
-                
 		if(isset($_POST['emprestimo']))
 		{
-			$model->attributes=$_POST['emprestimo'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_emprestimo));
+                        $emprestimo = $_POST['emprestimo'];
+                        $emprestimo['data_retirada'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_retirada'])));
+                        $emprestimo['data_devolucao'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_devolucao'])));
+
+                        $model->attributes=$emprestimo;
+                        print_r ($model->attributes);
+//			if($model->save())
+//				$this->redirect(array('view','id'=>$model->id_emprestimo));
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$model, 'aluno'=>$aluno,
 		));
 	}
+
+        /**
+	 * Report the return a particular book.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionReportReturn()
+	{
+
+		if(isset($_POST['emprestimo']))
+		{
+                        $emprestimo = $_POST['emprestimo'];
+                        
+		}
+                echo 'TODO!';
+    	}
 
 	/**
 	 * Deletes a particular model.

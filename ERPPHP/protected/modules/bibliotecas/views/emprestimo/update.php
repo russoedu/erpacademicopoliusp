@@ -15,4 +15,4 @@ $this->breadcrumbs=array(
 	<li><?php echo CHtml::link('Manage emprestimo',array('admin')); ?></li>
 </ul><!-- actions -->
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_formRenovacao', array('model'=>$model, 'aluno'=>$aluno)); ?>

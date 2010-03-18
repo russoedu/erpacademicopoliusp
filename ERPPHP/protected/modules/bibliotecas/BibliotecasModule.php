@@ -11,6 +11,8 @@ class BibliotecasModule extends CWebModule
 		$this->setImport(array(
 			'bibliotecas.models.*',
 			'bibliotecas.components.*',
+                        'alunos.models.*',
+                        'alunos.components.*',
 		));
 	}
 

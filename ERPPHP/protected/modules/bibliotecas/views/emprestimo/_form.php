@@ -7,8 +7,9 @@
 	<?php echo CHtml::errorSummary($model); ?>
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'data_retirada'); ?>
-                <?php $model->data_retirada=date('d m y');
+                <?php $model->data_retirada=date('Y/m/d');
                     $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                'id'=>'dpDataRetirada',
                                 'model'=>$model,
                                 'attribute'=>'data_retirada',
                                 'language'=>'pt-br',
@@ -27,13 +28,12 @@
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'data_devolucao'); ?>
 		<?php $today = date("Y-m-d");// current date
-                    $nextweek = date("Y-m-d",strtotime(date("Y-m-d", strtotime($today)) . " +7 days"));
-                    $model->data_devolucao = $nextweek;
+                    $model->data_devolucao = date("Y/m/d",strtotime(date("Y-m-d", strtotime($today)) . " +7 days"));
                     $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                'id'=>'dpDataDevolucao',
                                 'model'=>$model,
                                 'attribute'=>'data_devolucao',
                                 'language'=>'pt-br',
-                                'value'=>date('dd/MM/yyyy'),
                                 'options'=>array(
                                     'showAnim'=>'fold',
                                     ),
