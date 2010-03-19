@@ -2,7 +2,7 @@
 
 <?php echo CHtml::beginForm(); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos <span class="required">*</span> são obrigatórios.</p>
 
 	<?php echo CHtml::errorSummary($model); ?>
 

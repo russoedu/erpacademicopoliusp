@@ -4,11 +4,11 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>List biblioteca</h1>
+<h1>Listagem de bibliotecas</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('Create biblioteca',array('create')); ?></li>
-	<li><?php echo CHtml::link('Manage biblioteca',array('admin')); ?></li>
+	<li><?php echo CHtml::link('Criar biblioteca',array('create')); ?></li>
+        
 </ul><!-- actions -->
 
 <?php $this->widget('zii.widgets.CListView', array(
