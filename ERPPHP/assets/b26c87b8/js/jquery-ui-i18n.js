@@ -1,4 +1,4 @@
-﻿/* Inicializacão em português brasileiro para a extensão 'UI date picker' para jQuery. */
+/* Inicializacão em português brasileiro para a extensão 'UI date picker' para jQuery. */
 /* Traducido por Guilherme Fré. */
 jQuery(function($){
 	$.datepicker.regional['pt-br'] = {
@@ -14,12 +14,12 @@ jQuery(function($){
 		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','S&aacute;b'],
 		dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','S&aacute;b'],
 		dateFormat: 'dd/mm/yy', 
-        firstDay: 0,
-        showMonthAfterYear:false
+                firstDay: 0,
+                showMonthAfterYear:false
 		};
 	$.datepicker.setDefaults($.datepicker.regional['pt-br']);
 });﻿
-/* Arabic Translation for jQuery UI date picker plugin. */
+﻿/* Arabic Translation for jQuery UI date picker plugin. */
 /* Khaled Al Horani -- koko.dw@gmail.com */
 /* خالد الحوراني -- koko.dw@gmail.com */
 /* NOTE: monthNames are the original months names and they are the Arabic names, not the new months name فبراير - يناير and there isn't any Arabic roots for these months */
