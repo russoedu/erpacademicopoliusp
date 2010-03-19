@@ -1,5 +1,6 @@
 <?php
 
+
 class UserModule extends CWebModule
 {
 	public $user_pase_size = 10;
@@ -126,8 +127,10 @@ class UserModule extends CWebModule
                 return 'professor';
             else if (aluno::model()->find('tbl_users_id = '. $user_id))
                 return 'aluno';
+            else if (bibliotecario::model()->find('tbl_users_id = '. $user_id))
+               return 'bibliotecario';
             else
-                return 'haha';
+                return 'guest';
         }
         
 }
