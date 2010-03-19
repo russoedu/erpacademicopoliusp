@@ -1,4 +1,5 @@
 <?php
+require '../modules/alunos/models/aluno.php';
 
 class UserModule extends CWebModule
 {
@@ -111,4 +112,17 @@ class UserModule extends CWebModule
 				return User::model()->active()->safe()->findbyPk(Yii::app()->user->id);
 		}
 	}
+
+
+        public function getGrupo(){
+            if (Yii::app()->user->isGuest)
+                    return 'guest';
+            else if (User::model()->superuser()->findbyPk(Yii::app()->user->id))
+                    return 'admin';
+            else if (aluno::model()->findByAttributes('tbl_users_id', Yii::app()->user->id))
+                return 'aluno';
+            else
+                return 'haha'
+
+        }
 }

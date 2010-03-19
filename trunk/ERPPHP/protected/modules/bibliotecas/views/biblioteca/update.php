@@ -2,7 +2,7 @@
 $this->breadcrumbs=array(
 	'Bibliotecas'=>array('index'),
 	$model->nome=>array('view','id'=>$model->id_biblioteca),
-	
+	'Atualizar'
 );
 ?>
 

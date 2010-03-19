@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Bibliotecas'=>array('index'),
-	'Create',
+	'Criar',
 );
 ?>
 <h1>Criar Biblioteca</h1>
