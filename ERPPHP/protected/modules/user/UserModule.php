@@ -111,4 +111,23 @@ class UserModule extends CWebModule
 				return User::model()->active()->safe()->findbyPk(Yii::app()->user->id);
 		}
 	}
+
+
+
+
+
+        public function getGrupo(){
+            $user_id = Yii::app()->user->id;
+            if (Yii::app()->user->isGuest)
+                    return 'guest';
+            else if (User::model()->superuser()->findbyPk($user_id))
+                    return 'admin';
+            else if (professor::model()->find('tbl_users_id = '. $user_id))
+                return 'professor';
+            else if (aluno::model()->find('tbl_users_id = '. $user_id))
+                return 'aluno';
+            else
+                return 'haha';
+        }
+        
 }

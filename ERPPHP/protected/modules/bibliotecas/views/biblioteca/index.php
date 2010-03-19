@@ -7,7 +7,11 @@ $this->breadcrumbs=array(
 <h1>Listagem de bibliotecas</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('Criar biblioteca',array('create')); ?></li>
+	<li><?php
+        if(Yii::app()->getModule('user')->isAdmin()){
+        echo CHtml::link('Criar biblioteca',array('create'));
+        }
+        ?></li>
         
 </ul><!-- actions -->
 
