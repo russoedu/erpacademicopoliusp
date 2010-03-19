@@ -71,6 +71,7 @@ class DisciplinaController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
+			'cursos'=>curso::model()->findAll(),
 		));
 	}
 
@@ -90,6 +91,7 @@ class DisciplinaController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'cursos'=>curso::model()->findAll(),
 		));
 	}
 
