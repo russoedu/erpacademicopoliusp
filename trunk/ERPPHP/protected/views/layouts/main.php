@@ -26,23 +26,56 @@
             </div><!-- header -->
 
             <div id="mainmenu">
+
                 <?php
-                
-                $this->widget('zii.widgets.CMenu',array(
-                        'items'=>array(
-                        #array('label'=>'Home', 'url'=>array('/site/index')),
-                        #array('label'=>'Sobre', 'url'=>array('/site/page', 'view'=>'about')),
+                //chave , nome do grupo , valor menus para o grupo....
+                $menu = array(
+                        //menus para guest...
+                        'guest'=>array(
                                 array('label'=>'Contato', 'url'=>array('/site/contact')),
                                 array('label'=>'Alunos', 'url'=>array('/alunos/aluno')),
                                 array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
                                 array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
                                 array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
-                                #array('label'=>'Livros', 'url'=>array('/bibliotecas/livro')),
                                 array('url'=>Yii::app()->getModule('user')->loginUrl, 'label'=>Yii::app()->getModule('user')->t("Login"), 'visible'=>Yii::app()->user->isGuest),
-                                array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>Yii::app()->getModule('user')->t("Registration"), 'visible'=>Yii::app()->user->isGuest),
+                                array('url'=>Yii::app()->getModule('user')->registrationUrl, 'label'=>'Registro', 'visible'=>Yii::app()->user->isGuest),
                                 array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>Yii::app()->getModule('user')->t("Profile"), 'visible'=>!Yii::app()->user->isGuest),
                                 array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')', 'visible'=>!Yii::app()->user->isGuest)
                         ),
+                        'aluno'=>array(
+                                array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
+                                array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
+                                array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
+                                array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>'Perfil'),
+                                array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')')
+                        ),
+                        'bibliotecario'=>array(
+                                array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
+                                array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>'Perfil'),
+                                array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')')
+                        ),
+                        'admin'=>array(
+                                array('label'=>'Alunos', 'url'=>array('/alunos/aluno')),
+                                array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
+                                array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
+                                array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
+                                array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>'Perfil'),
+                                array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')')
+                        ),
+                        'professor'=>array(
+                                array('label'=>'Alunos', 'url'=>array('/alunos/aluno')),
+                                array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
+                                array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
+                                array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
+                                array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>'Perfil'),
+                                array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')')
+                        )
+                );
+                $grupo = Yii::app()->getModule('user')->getGrupo();
+                $this->widget('zii.widgets.CMenu',array(
+                    //widget do menu de fato meu value!...
+                        'items'=>$menu[$grupo]
+
                 )); ?>
             </div><!-- mainmenu -->
 
