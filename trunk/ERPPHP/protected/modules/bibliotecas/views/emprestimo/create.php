@@ -1,14 +1,14 @@
 <?php
 $this->breadcrumbs=array(
-	'Emprestimos'=>array('index'),
-	'Novo',
+	'Bibliotecas'=>array('/bibliotecas/biblioteca/index'),
+        $biblioteca->nome=>array('/bibliotecas/biblioteca/view','id'=>$biblioteca->id_biblioteca),
+        $livro->titulo=>array('/bibliotecas/livro/view','id'=>$livro->id_livro),
+	'Novo Empréstimo',
 );
 ?>
-<h1>Novo Empréstimo - Livro</h1>
+<h1>Novo Empréstimo</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('List emprestimo',array('index')); ?></li>
-	<li><?php echo CHtml::link('Manage emprestimo',array('admin')); ?></li>
 </ul><!-- actions -->
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'livro'=>$livro)); ?>

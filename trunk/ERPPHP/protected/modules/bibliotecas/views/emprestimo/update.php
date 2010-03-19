@@ -1,18 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Emprestimos'=>array('index'),
-	$model->id_emprestimo=>array('view','id'=>$model->id_emprestimo),
-	'Update',
+        'Bibliotecas'=>array('/bibliotecas/biblioteca/index'),
+        $biblioteca->nome=>array('/bibliotecas/biblioteca/view','id'=>$biblioteca->id_biblioteca),
+        $livro->titulo=>array('/bibliotecas/livro/view','id'=>$livro->id_livro),
+	'Renovação de Empréstimo',
 );
 ?>
 
-<h1>Update emprestimo <?php echo $model->id_emprestimo; ?></h1>
+<h1>Renovação de Empréstimo</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('List emprestimo',array('index')); ?></li>
-	<li><?php echo CHtml::link('Create emprestimo',array('create')); ?></li>
-	<li><?php echo CHtml::link('View emprestimo',array('view','id'=>$model->id_emprestimo)); ?></li>
-	<li><?php echo CHtml::link('Manage emprestimo',array('admin')); ?></li>
 </ul><!-- actions -->
 
-<?php echo $this->renderPartial('_formRenovacao', array('model'=>$model, 'aluno'=>$aluno)); ?>
+<?php echo $this->renderPartial('_formRenovacao', array('model'=>$model, 'aluno'=>$aluno, 'livro'=>$livro)); ?>

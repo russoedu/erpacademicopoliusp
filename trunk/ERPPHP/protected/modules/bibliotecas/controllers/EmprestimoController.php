@@ -50,9 +50,15 @@ class EmprestimoController extends Controller
 	 */
 	public function actionView()
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel(),
-		));
+            $model = $this->loadModel();
+
+            $aluno = aluno::model()->findByPk($model->id_aluno);
+            $livro = livro::model()->findByPk($model->id_livro);
+            $biblioteca = biblioteca::model()->findByPk($livro->id_biblioteca);
+
+            $this->render('view',array(
+                    'model'=>$model, 'aluno'=>$aluno,'livro'=>$livro,'biblioteca'=>$biblioteca,
+            ));
 	}
 
 	/**
@@ -62,8 +68,9 @@ class EmprestimoController extends Controller
 	public function actionCreate()
 	{
             $id_livro = $_REQUEST['id_livro'];
+
             $model=new emprestimo;
-            $emprestimo = Array();
+
             if(isset($_POST['emprestimo']))
             {
                 $emprestimo = $_POST['emprestimo'];
@@ -76,8 +83,14 @@ class EmprestimoController extends Controller
                 if($model->save())
 			$this->redirect(array('view','id'=>$model->id_emprestimo));
             }
+
+            $aluno = aluno::model()->findByPk($model->id_aluno);
+            $livro = livro::model()->findByPk($id_livro);
+            
+            $biblioteca = biblioteca::model()->findByPk($livro->id_biblioteca);
+
             $this->render('create',array(
-                'model'=>$model,
+                'model'=>$model, 'aluno'=>$aluno,'livro'=>$livro,'biblioteca'=>$biblioteca,
             ));
 	}
 
@@ -91,8 +104,6 @@ class EmprestimoController extends Controller
 
                 $model = emprestimo::model()->find('id_livro = :idLivro AND data_devolucao_efetiva is null', Array (':idLivro'=>$id_livro));
 
-                $aluno = Aluno::model()->findByPk($model->id_aluno);
-
 		if(isset($_POST['emprestimo']))
 		{
                         $emprestimo = $_POST['emprestimo'];
@@ -100,13 +111,17 @@ class EmprestimoController extends Controller
                         $emprestimo['data_devolucao'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_devolucao'])));
 
                         $model->attributes=$emprestimo;
-                        print_r ($model->attributes);
-//			if($model->save())
-//				$this->redirect(array('view','id'=>$model->id_emprestimo));
+                        
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_emprestimo));
 		}
 
+                $aluno = aluno::model()->findByPk($model->id_aluno);
+                $livro = livro::model()->findByPk($model->id_livro);
+                $biblioteca = biblioteca::model()->findByPk($livro->id_biblioteca);
+
 		$this->render('update',array(
-			'model'=>$model, 'aluno'=>$aluno,
+			'model'=>$model, 'aluno'=>$aluno,'livro'=>$livro,'biblioteca'=>$biblioteca,
 		));
 	}
 
@@ -116,13 +131,26 @@ class EmprestimoController extends Controller
 	 */
 	public function actionReportReturn()
 	{
-
 		if(isset($_POST['emprestimo']))
 		{
-                        $emprestimo = $_POST['emprestimo'];
+                        $id_livro = $_REQUEST['id_livro'];
                         
+                        $model = emprestimo::model()->find('id_livro = :idLivro AND data_devolucao_efetiva is null', Array (':idLivro'=>$id_livro));
+                        
+                        $emprestimo = $_POST['emprestimo'];
+
+                        $emprestimo['id_livro'] = $id_livro;
+                        $emprestimo['data_retirada'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_retirada'])));
+                        $emprestimo['data_devolucao'] = date('Y-m-d',strtotime(str_replace('/', '-', $emprestimo['data_devolucao'])));
+
+                        $model->attributes=$emprestimo;
+                        $model->data_devolucao_efetiva = date('Y-m-d');
+                        
+                        if($model->save()){
+				$this->redirect(array('view', 'id'=>$model->id_livro,));
+                        }
 		}
-                echo 'TODO!';
+                
     	}
 
 	/**
