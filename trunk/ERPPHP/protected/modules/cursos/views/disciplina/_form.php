@@ -8,7 +8,12 @@
 
 	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'id_curso'); ?>
-		<?php echo CHtml::activeTextField($model,'id_curso'); ?>
+		<?php 
+			echo CHtml::activeDropDownList($model, 'id_curso',
+				CHtml::listData(
+					$cursos,'id_curso','nome')
+			); 
+		?>
 		<?php echo CHtml::error($model,'id_curso'); ?>
 	</div>
 
