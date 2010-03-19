@@ -5,7 +5,8 @@ $this->breadcrumbs=array(
 );
 $is_Admin = Yii::app()->getModule('user')->isAdmin();
 ?>
-<h1>Biblioteca <?php echo $model->nome; ?> </h1>
+
+<h1>Biblioteca: <?php echo $model->nome; ?></h1>
 
 <ul class="actions">
     <li><?php echo CHtml::link('Listagem de bibliotecas',array('index')); ?></li>

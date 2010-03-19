@@ -76,7 +76,9 @@ class LivroController extends Controller {
     public function actionCreate() {
         $id_bilioteca = $_REQUEST['bib'];
         $model=new livro;
+		$biblioteca = biblioteca::model()->findByPk($id_bilioteca);
         $livro = Array();
+
         if(isset($_POST['livro'])) {
             $livro = $_POST['livro'];
             $livro['id_biblioteca'] = $id_bilioteca;
@@ -87,6 +89,7 @@ class LivroController extends Controller {
         echo $model->id_biblioteca;
         $this->render('create',array(
                 'model'=>$model,
+				'biblioteca'=> $biblioteca,
         ));
     }
 
@@ -96,6 +99,8 @@ class LivroController extends Controller {
      */
     public function actionUpdate() {
         $model=$this->loadModel();
+		$biblioteca = biblioteca::model()->findByPk($model->id_biblioteca);
+		
         if(isset($_POST['livro'])) {
             $model->attributes=$_POST['livro'];
             if($model->save())
@@ -104,6 +109,7 @@ class LivroController extends Controller {
 
         $this->render('update',array(
                 'model'=>$model,
+				'biblioteca'=> $biblioteca,
         ));
     }
 
