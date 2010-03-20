@@ -12,4 +12,4 @@ $this->breadcrumbs=array(
 <ul class="actions">
 </ul><!-- actions -->
 
-<?php echo $this->renderPartial('_formRenovacao', array('model'=>$model, 'aluno'=>$aluno, 'livro'=>$livro)); ?>
+<?php echo $this->renderPartial('_formRenovacao', array('model'=>$model, 'aluno'=>$aluno, 'livro'=>$livro, 'status'=>$status)); ?>

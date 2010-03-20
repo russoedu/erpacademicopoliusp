@@ -120,8 +120,15 @@ class EmprestimoController extends Controller
                 $livro = livro::model()->findByPk($model->id_livro);
                 $biblioteca = biblioteca::model()->findByPk($livro->id_biblioteca);
 
+                if(isset($model->data_devolucao_efetiva))
+                    $status = "Finalizado";
+                elseif(!isset($model->data_devolucao_efetiva) && strtotime($model->data_devolucao) < strtotime(date('Y-m-d')))
+                    $status = "Em Atraso";
+                else
+                    $status = "Ativo";
+
 		$this->render('update',array(
-			'model'=>$model, 'aluno'=>$aluno,'livro'=>$livro,'biblioteca'=>$biblioteca,
+			'model'=>$model, 'aluno'=>$aluno,'livro'=>$livro,'biblioteca'=>$biblioteca,'status'=>$status,
 		));
 	}
 
