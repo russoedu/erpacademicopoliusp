@@ -51,8 +51,13 @@
 		<?php echo CHtml::error($model,'data_devolucao'); ?>
 	</div>
 
+        <div class="row">
+		<?php echo CHtml::Label('Status', 'lblStatus'); ?>
+		<?php echo CHtml::TextField('txtStatus', $status); ?>
+	</div>
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Salvar'); ?>
+		<?php if($status == 'Ativo') echo CHtml::submitButton('Salvar'); ?>
                 <?php echo CHtml::submitButton('Reportar Devolução', Array('submit'=>'index.php?r=/bibliotecas/emprestimo/ReportReturn&id_livro=' . $livro->id_livro)); ?>
 	</div>
 
