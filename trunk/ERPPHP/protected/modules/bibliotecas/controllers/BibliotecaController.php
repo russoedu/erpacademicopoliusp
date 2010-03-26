@@ -50,7 +50,7 @@ class BibliotecaController extends Controller {
      * Displays a particular model.
      */
     public function actionView() {
-        
+
         $dataProvider=new CActiveDataProvider('Livro', array(
                         'criteria'=>array(
                                 'condition'=>'id_biblioteca = ' . $_GET['id']
@@ -129,9 +129,11 @@ class BibliotecaController extends Controller {
                                 'pageSize'=>self::PAGE_SIZE,
                         ),
         ));
+        $actions = $this->actions_index();
 
         $this->render('index',array(
                 'dataProvider'=>$dataProvider,
+                'actions'=>$actions,
         ));
     }
 
@@ -185,15 +187,45 @@ class BibliotecaController extends Controller {
                         CHtml::link('Atualizar biblioteca',array('update','id'=>$model->id_biblioteca)),
                         CHtml::linkButton('Deletar biblioteca',array('submit'=>array('delete','id'=>$model->id_biblioteca),'confirm'=>'Tem certeza?'))
                 ),
-                'aluno' => array(),
-                'professor' => array(),
-                'bibliotecario' =>array(),
-                'guest' => array()
+                'aluno' => array(
+                        CHtml::link('Listagem de bibliotecas',array('index')),
+                ),
+                'professor' => array(
+                        CHtml::link('Listagem de bibliotecas',array('index')),
+                ),
+                'bibliotecario' =>array(
+                        CHtml::link('Listagem de bibliotecas',array('index')),
+                        CHtml::link('Adicionar livro', array('/bibliotecas/livro/create','bib'=>$model->id_biblioteca)),
+                        CHtml::link('Atualizar biblioteca',array('update','id'=>$model->id_biblioteca)),
+                ),
+                'guest' => array(
+                        CHtml::link('Listagem de bibliotecas',array('index')),
+                )
 
 
         );
         return $array_actions[$grupo];
 
+    }
+
+    public function actions_index(){
+        $grupo = $this->loadGrupo();
+        $array_actions = array(
+                'admin' => array(
+                        CHtml::link('Criar biblioteca',array('create')),
+                ),
+                'aluno' => array(
+                ),
+                'professor' => array(
+                ),
+                'bibliotecario' =>array(
+                ),
+                'guest' => array(
+                )
+
+
+        );
+        return $array_actions[$grupo];
     }
 
 }

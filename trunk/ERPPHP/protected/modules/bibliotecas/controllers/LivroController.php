@@ -7,6 +7,7 @@ class LivroController extends Controller {
      * @var CActiveRecord the currently loaded data model instance.
      */
     private $_model;
+    private $_grupo;
 
     /**
      * @return array action filters
@@ -62,11 +63,15 @@ class LivroController extends Controller {
         else
             $status="Disponível";
 
+        $actions = $this->actions_view($status);
         $this->render('view',array(
-            'model'=>$model, 'status'=>$status
-            ,'biblioteca'=>$biblioteca,
-        )
-                );
+                'model'=>$model,
+                'actions'=>$actions,
+                'biblioteca'=>$biblioteca,
+                'status'=>$status
+
+                )
+        );
     }
 
     /**
@@ -76,7 +81,7 @@ class LivroController extends Controller {
     public function actionCreate() {
         $id_bilioteca = $_REQUEST['bib'];
         $model=new livro;
-		$biblioteca = biblioteca::model()->findByPk($id_bilioteca);
+        $biblioteca = biblioteca::model()->findByPk($id_bilioteca);
         $livro = Array();
 
         if(isset($_POST['livro'])) {
@@ -89,7 +94,7 @@ class LivroController extends Controller {
         echo $model->id_biblioteca;
         $this->render('create',array(
                 'model'=>$model,
-				'biblioteca'=> $biblioteca,
+                'biblioteca'=> $biblioteca,
         ));
     }
 
@@ -99,8 +104,8 @@ class LivroController extends Controller {
      */
     public function actionUpdate() {
         $model=$this->loadModel();
-		$biblioteca = biblioteca::model()->findByPk($model->id_biblioteca);
-		
+        $biblioteca = biblioteca::model()->findByPk($model->id_biblioteca);
+
         if(isset($_POST['livro'])) {
             $model->attributes=$_POST['livro'];
             if($model->save())
@@ -109,7 +114,7 @@ class LivroController extends Controller {
 
         $this->render('update',array(
                 'model'=>$model,
-				'biblioteca'=> $biblioteca,
+                'biblioteca'=> $biblioteca,
         ));
     }
 
@@ -172,5 +177,45 @@ class LivroController extends Controller {
                 throw new CHttpException(404,'The requested page does not exist.');
         }
         return $this->_model;
+    }
+
+
+    public function actions_view($status) {
+        $grupo = $this->loadGrupo();
+        $model = $this->loadModel();
+        $array_actions = array(
+                'admin'=>array(
+                        CHtml::link('Editar Livro',array('update','id'=>$model->id_livro)),
+                        CHtml::linkButton('Remover Livro',array('submit'=>array('delete','id'=>$model->id_livro),'confirm'=>'Deseja realmente remover este livro?'))
+                ),
+                //falta terminar isso...
+                'professor'=>array(
+
+                ),
+                'bibliotecario'=>array(
+                        CHtml::link('Editar Livro',array('update','id'=>$model->id_livro)),
+                        CHtml::linkButton('Remover Livro',array('submit'=>array('delete','id'=>$model->id_livro),'confirm'=>'Deseja realmente remover este livro?'))
+                ),
+                'aluno'=>array(),
+                'guest'=>array(),
+
+        );
+        $adicional = CHtml::link('Emprestar Livro',array('/bibliotecas/emprestimo/create','id_livro'=>$model->id_livro));
+        if ($status == "Emprestado") {
+            $adicional = CHtml::link('Renovar Empréstimo',array('/bibliotecas/emprestimo/update','id_livro'=>$model->id_livro));
+        }
+
+        array_push($array_actions['bibliotecario'],$adicional );
+        array_push($array_actions['admin'],$adicional );
+
+        return $array_actions[$grupo];
+    }
+
+     /**
+     * retorna o grupo e seta a variavel do grupo....
+     */
+    public function loadGrupo() {
+        $this->_grupo = Yii::App()->getModule('user')->getGrupo();
+        return $this->_grupo;
     }
 }
