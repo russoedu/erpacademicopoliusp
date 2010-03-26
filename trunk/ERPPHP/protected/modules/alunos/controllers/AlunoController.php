@@ -95,8 +95,8 @@ class AlunoController extends Controller {
                     $user_mod = User::model()->findByPk($profile_aluno->user_id);
                     $user_data = Array(
                         'username'=>$model->id_aluno,
-                        'password'=>UserModule::encrypting($model->id_aluno),
-                        'activkey'=>UserModule::encrypting(microtime().$model->id_aluno),
+                        'password'=>Yii::app()->getModule('user')->encrypting($model->id_aluno),
+                        'activkey'=>Yii::app()->getModule('user')->encrypting(microtime().$model->id_aluno),
                         'email'=> $dados_aluno['email'],
                         'createtime'=>time(),
                         'lastvisit'=>time(),
