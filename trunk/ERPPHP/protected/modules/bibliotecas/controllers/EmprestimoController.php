@@ -184,14 +184,22 @@ class EmprestimoController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('emprestimo', array(
-			'pagination'=>array(
-				'pageSize'=>self::PAGE_SIZE,
-			),
-		));
+                $dataProvider = null;
+                $aluno = null;
+                if (isset ($_GET['id_aluno'])){
+                    $aluno = aluno::model()->findByPk($_GET['id_aluno']);
+
+                    $dataProvider=new CActiveDataProvider('emprestimo', array(
+                            'criteria'=>array(
+                                'condition'=>'id_aluno=' . $_GET['id_aluno']),
+                            'pagination'=>array(
+                                    'pageSize'=>self::PAGE_SIZE,
+                            ),
+                        ));
+                }
 
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider'=>$dataProvider,'aluno'=>$aluno,
 		));
 	}
 
@@ -199,7 +207,7 @@ class EmprestimoController extends Controller
 	 * Manages all models.
 	 */
 	public function actionAdmin()
-	{
+        {
 		$dataProvider=new CActiveDataProvider('emprestimo', array(
 			'pagination'=>array(
 				'pageSize'=>self::PAGE_SIZE,
