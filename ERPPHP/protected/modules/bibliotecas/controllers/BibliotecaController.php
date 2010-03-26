@@ -51,9 +51,15 @@ class BibliotecaController extends Controller {
      */
     public function actionView() {
 
+         if (isset ($_POST['txtSearch']))
+                   $search = '%' . $_POST['txtSearch'] . '%';
+            else
+                   $search = "%%";
+
         $dataProvider=new CActiveDataProvider('Livro', array(
                         'criteria'=>array(
-                                'condition'=>'id_biblioteca = ' . $_GET['id']
+                            'condition'=>'id_biblioteca = :id_biblioteca AND (isbn like :search OR titulo like :search OR autor like :search OR editora like :search)',
+                            'params'=>array(':id_biblioteca'=>$_GET['id'], ':search'=>$search,),
                         ),
                         'pagination'=>array(
                                 'pageSize'=>self::PAGE_SIZE,
@@ -65,7 +71,8 @@ class BibliotecaController extends Controller {
         $this->render('view',array(
                 'model'=>$this->loadModel(),
                 'dataProvider'=>$dataProvider,
-                'actions'=>$actions
+                'actions'=>$actions,
+                'search'=>$search,
         ));
     }
 
@@ -175,6 +182,15 @@ class BibliotecaController extends Controller {
     }
 
     /**
+     * retorna o id do aluno na tabela específica
+     */
+    public function getIdAluno(){
+        $tbl_user_id = Yii::App()->user->id;
+        $aluno = aluno::model()->find('tbl_users_id=' . $tbl_user_id);
+        return $aluno->id_aluno;
+    }
+
+    /**
      * retorna as ações para a página actionview, conforme o grupo...
      */
     public function actions_view() {
@@ -188,7 +204,7 @@ class BibliotecaController extends Controller {
                         CHtml::linkButton('Deletar biblioteca',array('submit'=>array('delete','id'=>$model->id_biblioteca),'confirm'=>'Tem certeza?'))
                 ),
                 'aluno' => array(
-                        CHtml::link('Listagem de bibliotecas',array('index')),
+                        CHtml::link('Meus Empréstimos',array('/bibliotecas/emprestimo/index','id_aluno'=>$this->getIdAluno()))
                 ),
                 'professor' => array(
                         CHtml::link('Listagem de bibliotecas',array('index')),
