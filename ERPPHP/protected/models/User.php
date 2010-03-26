@@ -49,12 +49,12 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			#array('username, password, email', 'required'),
-			array('username', 'length', 'max'=>20, 'min' => 1,'message' => UserModule::t("Incorrect username (length between 3 and 20 characters).")),
-			array('password', 'length', 'max'=>128, 'min' => 4,'message' => UserModule::t("Incorrect password (minimal length 4 symbols).")),
+			array('username', 'length', 'max'=>20, 'min' => 1,'message' => Yii::app()->getModule('user')->t("Incorrect username (length between 3 and 20 characters).")),
+			array('password', 'length', 'max'=>128, 'min' => 4,'message' => Yii::app()->getModule('user')->t("Incorrect password (minimal length 4 symbols).")),
 			array('email', 'email'),
-			array('username', 'unique', 'message' => UserModule::t("This user's name already exists.")),
-			array('email', 'unique', 'message' => UserModule::t("This user's email adress already exists.")),
-			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => UserModule::t("Incorrect symbol's. (A-z0-9)")),
+			array('username', 'unique', 'message' => Yii::app()->getModule('user')->t("This user's name already exists.")),
+			array('email', 'unique', 'message' => Yii::app()->getModule('user')->t("This user's email adress already exists.")),
+			array('username', 'match', 'pattern' => '/^[A-Za-z0-9_]+$/u','message' => Yii::app()->getModule('user')->t("Incorrect symbol's. (A-z0-9)")),
 			array('status', 'in', 'range'=>array(0,1,-1)),
 			array('superuser', 'in', 'range'=>array(0,1)),
 			array('username, password, email, createtime, lastvisit, superuser, status', 'required'),
@@ -80,17 +80,17 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username'=>UserModule::t("username"),
-			'password'=>UserModule::t("password"),
-			'verifyPassword'=>UserModule::t("Retype Password"),
-			'email'=>UserModule::t("E-mail"),
-			'verifyCode'=>UserModule::t("Verification Code"),
+			'username'=>Yii::app()->getModule('user')->t("username"),
+			'password'=>Yii::app()->getModule('user')->t("password"),
+			'verifyPassword'=>Yii::app()->getModule('user')->t("Retype Password"),
+			'email'=>Yii::app()->getModule('user')->t("E-mail"),
+			'verifyCode'=>Yii::app()->getModule('user')->t("Verification Code"),
 			'id' => 'Id',
-			'activkey' => UserModule::t("activation key"),
-			'createtime' => UserModule::t("Registration date"),
-			'lastvisit' => UserModule::t("Last visit"),
-			'superuser' => UserModule::t("Superuser"),
-			'status' => UserModule::t("Status"),
+			'activkey' => Yii::app()->getModule('user')->t("activation key"),
+			'createtime' => Yii::app()->getModule('user')->t("Registration date"),
+			'lastvisit' => Yii::app()->getModule('user')->t("Last visit"),
+			'superuser' => Yii::app()->getModule('user')->t("Superuser"),
+			'status' => Yii::app()->getModule('user')->t("Status"),
 		);
 	}
 	
@@ -118,13 +118,13 @@ class User extends CActiveRecord
 	public function itemAlias($type,$code=NULL) {
 		$_items = array(
 			'UserStatus' => array(
-				'0' => UserModule::t('Not active'),
-				'1' => UserModule::t('Active'),
-				'-1'=> UserModule::t('Banned'),
+				'0' => Yii::app()->getModule('user')->t('Not active'),
+				'1' => Yii::app()->getModule('user')->t('Active'),
+				'-1'=> Yii::app()->getModule('user')->t('Banned'),
 			),
 			'AdminStatus' => array(
-				'0' => UserModule::t('No'),
-				'1' => UserModule::t('Yes'),
+				'0' => Yii::app()->getModule('user')->t('No'),
+				'1' => Yii::app()->getModule('user')->t('Yes'),
 			),
 		);
 		if (isset($code))
