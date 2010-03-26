@@ -86,21 +86,23 @@ class UserController extends Controller {
                 if($model->save()) {
                     $profile->user_id=$model->id;
                     $profile->save();
-                    switch ($group){
+                    switch ($group) {
                         case 'p':
-                        $professor = new professor;
-                        $professor->nome = $_POST['Profile']['firstname'] . ' '.
-                                $_POST['Profile']['lastname'];
-                        $professor->tbl_users_id = $model->id;
-                        $professor->id_professor = $_POST['id'];
-                        $professor->save();
+                            $professor = new professor;
+                            $professor->nome = $_POST['Profile']['firstname'] . ' '.
+                                    $_POST['Profile']['lastname'];
+                            $professor->tbl_users_id = $model->id;
+                            $professor->id_professor = $_POST['id'];
+                            $professor->save();
+                            break;
                         case 'b':
-                        $bibliotecario = new bibliotecario;
-                        $bibliotecario->nome = $_POST['Profile']['firstname'] . ' '.
-                                $_POST['Profile']['lastname'];
-                        $bibliotecario->tbl_users_id = $model->id;
-                        $bibliotecario->id_bibliotecario = $_POST['id'];
-                        $bibliotecario->save();
+                            $bibliotecario = new bibliotecario;
+                            $bibliotecario->nome = $_POST['Profile']['firstname'] . ' '.
+                                    $_POST['Profile']['lastname'];
+                            $bibliotecario->tbl_users_id = $model->id;
+                            $bibliotecario->id_bibliotecario = $_POST['id'];
+                            $bibliotecario->save();
+                            break;
                     }
                     $this->redirect(array('/user/admin'));
                 }
