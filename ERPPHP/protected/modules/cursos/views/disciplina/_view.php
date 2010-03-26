@@ -4,8 +4,8 @@
 	<?php echo CHtml::link(CHtml::encode($data->id_disciplina), array('view', 'id'=>$data->id_disciplina)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_curso')); ?>:</b>
-	<?php echo CHtml::encode($data->id_curso); ?>
+	<b>Nome do Curso:</b>
+	<?php echo CHtml::encode(curso::model()->findByPk($data->id_curso)->nome);?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_professor_responsavel')); ?>:</b>
