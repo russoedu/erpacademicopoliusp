@@ -26,15 +26,15 @@ class LivroController extends Controller {
     public function accessRules() {
         return array(
                 array('allow',  // allow all users to perform 'index' and 'view' actions
-                        'actions'=>array('index','view'),
+                        'actions'=>array('view'),
                         'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                        'actions'=>array('create','update'),
+                        'actions'=>array('create','update','delete'),
                         'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                        'actions'=>array('admin','delete'),
+                        'actions'=>array(),
                         'users'=>array('admin'),
                 ),
                 array('deny',  // deny all users
@@ -136,36 +136,6 @@ class LivroController extends Controller {
     }
 
     /**
-     * Lists all models.
-     */
-    public function actionIndex() {
-        $dataProvider=new CActiveDataProvider('livro', array(
-                        'pagination'=>array(
-                                'pageSize'=>self::PAGE_SIZE,
-                        ),
-        ));
-
-        $this->render('index',array(
-                'dataProvider'=>$dataProvider,
-        ));
-    }
-
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin() {
-        $dataProvider=new CActiveDataProvider('livro', array(
-                        'pagination'=>array(
-                                'pageSize'=>self::PAGE_SIZE,
-                        ),
-        ));
-
-        $this->render('admin',array(
-                'dataProvider'=>$dataProvider,
-        ));
-    }
-
-    /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      */
@@ -179,30 +149,29 @@ class LivroController extends Controller {
         return $this->_model;
     }
 
-
     public function actions_view($status) {
         $grupo = $this->loadGrupo();
         $model = $this->loadModel();
         $array_actions = array(
                 'admin'=>array(
-                        CHtml::link('Editar Livro',array('update','id'=>$model->id_livro)),
+                        CHtml::link('Atualizar Livro',array('update','id'=>$model->id_livro)),
                         CHtml::linkButton('Remover Livro',array('submit'=>array('delete','id'=>$model->id_livro),'confirm'=>'Deseja realmente remover este livro?'))
                 ),
-                //falta terminar isso...
-                'professor'=>array(
-
-                ),
+                'professor'=>array(),
                 'bibliotecario'=>array(
-                        CHtml::link('Editar Livro',array('update','id'=>$model->id_livro)),
+                        CHtml::link('Atualizar Livro',array('update','id'=>$model->id_livro)),
                         CHtml::linkButton('Remover Livro',array('submit'=>array('delete','id'=>$model->id_livro),'confirm'=>'Deseja realmente remover este livro?'))
                 ),
                 'aluno'=>array(),
                 'guest'=>array(),
 
         );
-        $adicional = CHtml::link('Emprestar Livro',array('/bibliotecas/emprestimo/create','id_livro'=>$model->id_livro));
+        
         if ($status == "Emprestado") {
-            $adicional = CHtml::link('Renovar Empréstimo',array('/bibliotecas/emprestimo/update','id_livro'=>$model->id_livro));
+            $adicional = CHtml::link('Atualizar Empréstimo',array('/bibliotecas/emprestimo/update','id_livro'=>$model->id_livro));
+        }
+        else {
+            $adicional = CHtml::link('Emprestar Livro',array('/bibliotecas/emprestimo/create','id_livro'=>$model->id_livro));
         }
 
         array_push($array_actions['bibliotecario'],$adicional );
@@ -212,7 +181,7 @@ class LivroController extends Controller {
     }
 
      /**
-     * retorna o grupo e seta a variavel do grupo....
+     * Retorna o grupo e seta a variavel do grupo.
      */
     public function loadGrupo() {
         $this->_grupo = Yii::App()->getModule('user')->getGrupo();

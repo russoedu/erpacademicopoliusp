@@ -19,7 +19,7 @@
 
 	<div class="row">
 		<?php echo CHtml::activeLabel($aluno,'nome'); ?>
-		<?php echo CHtml::activeTextField($aluno,'nome',Array('readoly'=>'readonly')); ?>
+		<?php echo CHtml::activeTextField($aluno,'nome',Array('readonly'=>'readonly')); ?>
 		<?php echo CHtml::error($aluno,'nome'); ?>
 	</div>
 
@@ -53,12 +53,12 @@
 
         <div class="row">
 		<?php echo CHtml::Label('Status', 'lblStatus'); ?>
-		<?php echo CHtml::TextField('txtStatus', $status); ?>
+		<?php echo CHtml::TextField('txtStatus', $status, Array('readonly'=>'readonly')); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php if($status == 'Ativo') echo CHtml::submitButton('Salvar'); ?>
-                <?php echo CHtml::submitButton('Reportar Devolução', Array('submit'=>'index.php?r=/bibliotecas/emprestimo/ReportReturn&id_livro=' . $livro->id_livro)); ?>
+		<?php if($status == 'Ativo') echo CHtml::submitButton('Renovar Empréstimo'); ?>
+                <?php echo CHtml::submitButton('Efetuar Devolução', Array('submit'=>'index.php?r=/bibliotecas/emprestimo/ReportReturn&id_livro=' . $livro->id_livro)); ?>
 	</div>
 
 <?php echo CHtml::endForm(); ?>

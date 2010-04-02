@@ -50,8 +50,8 @@ class emprestimo extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'id_aluno0' => array(self::BELONGS_TO, 'Aluno', 'id_aluno'),
-			'id_livro0' => array(self::BELONGS_TO, 'Livro', 'id_livro'),
+			'aluno' => array(self::BELONGS_TO, 'Aluno', 'id_aluno'),
+			'livro' => array(self::BELONGS_TO, 'Livro', 'id_livro'),
 		);
 	}
 
@@ -61,12 +61,12 @@ class emprestimo extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_emprestimo' => 'Id Emprestimo',
-			'data_retirada' => 'Data Retirada',
-			'data_devolucao' => 'Data Devolucao',
+			'id_emprestimo' => 'Id Empréstimo',
+			'data_retirada' => 'Data de Retirada',
+			'data_devolucao' => 'Data de Devolução',
 			'id_aluno' => 'Id Aluno',
 			'id_livro' => 'Id Livro',
-                        'data_devolucao_efetiva' => 'Data Devolucao Efetiva',
+                        'data_devolucao_efetiva' => 'Data de Devolução Efetiva',
 		);
 	}
 }

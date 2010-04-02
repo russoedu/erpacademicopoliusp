@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Editar livro: <?php echo $model->titulo; ?></h1>
+<h1>Editar: <?php echo $model->titulo; ?></h1>
 
 <ul class="actions">
 	<!-- <li><?php echo CHtml::link('Listar livros',array('index')); ?></li> -->

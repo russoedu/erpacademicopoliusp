@@ -28,15 +28,15 @@ class EmprestimoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array(),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','reportreturn'),
+				'actions'=>array('create','update','reportreturn','meusemprestimos'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array(),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -46,24 +46,8 @@ class EmprestimoController extends Controller
 	}
 
 	/**
-	 * Displays a particular model.
-	 */
-	public function actionView()
-	{
-            $model = $this->loadModel();
-
-            $aluno = aluno::model()->findByPk($model->id_aluno);
-            $livro = livro::model()->findByPk($model->id_livro);
-            $biblioteca = biblioteca::model()->findByPk($livro->id_biblioteca);
-
-            $this->render('view',array(
-                    'model'=>$model, 'aluno'=>$aluno,'livro'=>$livro,'biblioteca'=>$biblioteca,
-            ));
-	}
-
-	/**
 	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * If creation is successful, the browser will be redirected to the 'view' page of Livros.
 	 */
 	public function actionCreate()
 	{
@@ -81,7 +65,7 @@ class EmprestimoController extends Controller
                 $model->attributes=$emprestimo;
                 
                 if($model->save())
-			$this->redirect(array('view','id'=>$model->id_emprestimo));
+                    $this->redirect(array('/bibliotecas/livro/view','id'=>$model->id_livro));
             }
 
             $aluno = aluno::model()->findByPk($model->id_aluno);
@@ -96,7 +80,7 @@ class EmprestimoController extends Controller
 
 	/**
 	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * If update is successful, the browser will be redirected to the 'view' page of Livros.
 	 */
 	public function actionUpdate()
 	{
@@ -113,7 +97,7 @@ class EmprestimoController extends Controller
                         $model->attributes=$emprestimo;
                         
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_emprestimo));
+				$this->redirect(array('/bibliotecas/livro/view','id'=>$model->id_livro));
 		}
 
                 $aluno = aluno::model()->findByPk($model->id_aluno);
@@ -134,7 +118,7 @@ class EmprestimoController extends Controller
 
         /**
 	 * Report the return a particular book.
-	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * If it is successful, the browser will be redirected to the 'view' page of Livros.
 	 */
 	public function actionReportReturn()
 	{
@@ -154,35 +138,16 @@ class EmprestimoController extends Controller
                         $model->data_devolucao_efetiva = date('Y-m-d');
                         
                         if($model->save()){
-				$this->redirect(array('view', 'id'=>$model->id_livro,));
+				$this->redirect(array('/bibliotecas/livro/view','id'=>$model->id_livro));
                         }
 		}
                 
     	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 * Lists all Emprestimos for a user
 	 */
-	public function actionDelete()
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel()->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_POST['ajax']))
-				$this->redirect(array('index'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
+	public function actionMeusEmprestimos()
 	{
                 $dataProvider = null;
                 $aluno = null;
@@ -191,31 +156,18 @@ class EmprestimoController extends Controller
 
                     $dataProvider=new CActiveDataProvider('emprestimo', array(
                             'criteria'=>array(
-                                'condition'=>'id_aluno=' . $_GET['id_aluno']),
+                                'condition'=>'id_aluno=' . $_GET['id_aluno'],
+                                'with'=>array('livro'),
+                                'order'=>'data_devolucao_efetiva, data_devolucao',
+                                ),
                             'pagination'=>array(
                                     'pageSize'=>self::PAGE_SIZE,
                             ),
                         ));
                 }
 
-		$this->render('index',array(
+		$this->render('meusEmprestimos',array(
 			'dataProvider'=>$dataProvider,'aluno'=>$aluno,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-        {
-		$dataProvider=new CActiveDataProvider('emprestimo', array(
-			'pagination'=>array(
-				'pageSize'=>self::PAGE_SIZE,
-			),
-		));
-
-		$this->render('admin',array(
-			'dataProvider'=>$dataProvider,
 		));
 	}
 

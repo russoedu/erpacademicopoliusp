@@ -13,9 +13,7 @@ $this->breadcrumbs=array(
         echo "<li>";
         echo $action;
         echo "<li/>";
-    }
-   ?>
-
+    } ?>
 </ul><!-- actions -->
 
 <?php $this->widget('zii.widgets.CDetailView', array(
@@ -26,17 +24,13 @@ $this->breadcrumbs=array(
         ),
 )); ?>
 
-<br />
-
+<br/>
+<h1>Livros</h1>
 
 <?php echo CHtml::beginForm(); ?>
     <div class="row">
 		<?php echo CHtml::textField('txtSearch', substr($search, 1, strlen($search)-2));?>
                 <?php echo CHtml::submitButton('Buscar', Array('submit'=>'index.php?r=/bibliotecas/biblioteca/view&id=' . $model->id_biblioteca)); ?>
-    </div>
-
-    <div class="row buttons">
-                
     </div>
 <?php echo CHtml::endForm(); ?>
 
