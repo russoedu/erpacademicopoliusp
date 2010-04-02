@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Listagem de bibliotecas</h1>
+<h1>Listagem de Bibliotecas</h1>
 
 <ul class="actions">
     <?php

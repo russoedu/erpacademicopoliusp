@@ -71,13 +71,13 @@ class livro extends CActiveRecord
 		return array(
 			'id_livro' => 'Id Livro',
 			'id_biblioteca' => 'Id Biblioteca',
-			'isbn' => 'Isbn',
+			'isbn' => 'ISBN',
 			'exemplar' => 'Exemplar',
-			'titulo' => 'Titulo',
+			'titulo' => 'Título',
 			'autor' => 'Autor',
 			'editora' => 'Editora',
 			'ano' => 'Ano',
-			'edicao' => 'Edicao',
+			'edicao' => 'Edição',
 			'local' => 'Local',
 		);
 	}

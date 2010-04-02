@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Biblioteca <?php echo $model->nome; ?></h1>
+<h1>Biblioteca: <?php echo $model->nome; ?></h1>
 
 <ul class="actions">
 </ul><!-- actions -->

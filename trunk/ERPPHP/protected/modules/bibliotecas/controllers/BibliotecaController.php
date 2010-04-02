@@ -30,11 +30,11 @@ class BibliotecaController extends Controller {
                         'users'=>array('*'),
                 ),
                 array('allow',
-
+                        'actions'=>array('update'),
                         'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                        'actions'=>array('admin','delete','create','update'),
+                        'actions'=>array('delete','create','update'),
                         'users'=>array('admin'),
                 ),
                 array('deny',  // deny all users
@@ -42,9 +42,6 @@ class BibliotecaController extends Controller {
                 ),
         );
     }
-
-
-
 
     /**
      * Displays a particular model.
@@ -144,20 +141,6 @@ class BibliotecaController extends Controller {
         ));
     }
 
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin() {
-        $dataProvider=new CActiveDataProvider('biblioteca', array(
-                        'pagination'=>array(
-                                'pageSize'=>self::PAGE_SIZE,
-                        ),
-        ));
-
-        $this->render('admin',array(
-                'dataProvider'=>$dataProvider,
-        ));
-    }
 
     /**
      * Returns the data model based on the primary key given in the GET variable.
@@ -184,10 +167,15 @@ class BibliotecaController extends Controller {
     /**
      * retorna o id do aluno na tabela específica
      */
-    public function getIdAluno(){
-        $tbl_user_id = Yii::App()->user->id;
-        $aluno = aluno::model()->find('tbl_users_id=' . $tbl_user_id);
-        return $aluno->id_aluno;
+    public function getIdAluno($grupo){
+        $id = null;
+        if($grupo == 'aluno'){
+            $tbl_user_id = Yii::App()->user->id;
+            $aluno = aluno::model()->find('tbl_users_id=' . $tbl_user_id);
+            $id = $aluno->id_aluno;
+        }       
+        return $id;
+        
     }
 
     /**
@@ -198,24 +186,16 @@ class BibliotecaController extends Controller {
         $model = $this->loadModel();
         $array_actions = array(
                 'admin' => array(
-                        CHtml::link('Listagem de bibliotecas',array('index')),
-                        CHtml::link('Adicionar livro', array('/bibliotecas/livro/create','bib'=>$model->id_biblioteca)),
-                        CHtml::link('Atualizar biblioteca',array('update','id'=>$model->id_biblioteca)),
-                        CHtml::linkButton('Deletar biblioteca',array('submit'=>array('delete','id'=>$model->id_biblioteca),'confirm'=>'Tem certeza?'))
+                        CHtml::link('Atualizar Biblioteca',array('update','id'=>$model->id_biblioteca)),
+                        CHtml::linkButton('Remover Biblioteca',array('submit'=>array('delete','id'=>$model->id_biblioteca),'confirm'=>'Deseja realmente remover esta biblioteca?')),
+                        CHtml::link('Adicionar Livro', array('/bibliotecas/livro/create','bib'=>$model->id_biblioteca)),
                 ),
-                'aluno' => array(
-                        CHtml::link('Meus Empréstimos',array('/bibliotecas/emprestimo/index','id_aluno'=>$this->getIdAluno()))
-                ),
-                'professor' => array(
-                        CHtml::link('Listagem de bibliotecas',array('index')),
-                ),
+                'aluno' => array(),
+                'professor' => array(),
                 'bibliotecario' =>array(
-                        CHtml::link('Listagem de bibliotecas',array('index')),
-                        CHtml::link('Adicionar livro', array('/bibliotecas/livro/create','bib'=>$model->id_biblioteca)),
-                        CHtml::link('Atualizar biblioteca',array('update','id'=>$model->id_biblioteca)),
+                        CHtml::link('Adicionar Livro', array('/bibliotecas/livro/create','bib'=>$model->id_biblioteca)),   
                 ),
                 'guest' => array(
-                        CHtml::link('Listagem de bibliotecas',array('index')),
                 )
 
 
@@ -228,9 +208,10 @@ class BibliotecaController extends Controller {
         $grupo = $this->loadGrupo();
         $array_actions = array(
                 'admin' => array(
-                        CHtml::link('Criar biblioteca',array('create')),
+                        CHtml::link('Criar Biblioteca',array('create')),
                 ),
                 'aluno' => array(
+                        CHtml::link('Meus Empréstimos',array('/bibliotecas/emprestimo/meusEmprestimos','id_aluno'=>$this->getIdAluno($grupo)))
                 ),
                 'professor' => array(
                 ),
@@ -238,8 +219,6 @@ class BibliotecaController extends Controller {
                 ),
                 'guest' => array(
                 )
-
-
         );
         return $array_actions[$grupo];
     }
