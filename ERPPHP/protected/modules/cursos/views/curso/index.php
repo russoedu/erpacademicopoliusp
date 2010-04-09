@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Lista de cursos</h1>
+<h1>Cursos</h1>
 
 <ul class="actions">
     <?php

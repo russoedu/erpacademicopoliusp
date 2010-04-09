@@ -80,16 +80,16 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'username'=>Yii::app()->getModule('user')->t("username"),
+			'username'=>'Nome de usuário',
 			'password'=>Yii::app()->getModule('user')->t("password"),
 			'verifyPassword'=>Yii::app()->getModule('user')->t("Retype Password"),
 			'email'=>Yii::app()->getModule('user')->t("E-mail"),
 			'verifyCode'=>Yii::app()->getModule('user')->t("Verification Code"),
 			'id' => 'Id',
 			'activkey' => Yii::app()->getModule('user')->t("activation key"),
-			'createtime' => Yii::app()->getModule('user')->t("Registration date"),
-			'lastvisit' => Yii::app()->getModule('user')->t("Last visit"),
-			'superuser' => Yii::app()->getModule('user')->t("Superuser"),
+			'createtime' => 'Data de Criação',
+			'lastvisit' => 'Último acesso',
+			'superuser' => 'Super Usuário',
 			'status' => Yii::app()->getModule('user')->t("Status"),
 		);
 	}

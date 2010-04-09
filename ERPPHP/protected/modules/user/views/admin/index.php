@@ -1,10 +1,9 @@
 <?php
 $this->breadcrumbs=array(
-	UserModule::t('Users')=>array('admin'),
-	UserModule::t('Manage'),
+	'Usuários',
 );
 ?>
-<h1><?php echo UserModule::t("Manage Users"); ?></h1>
+<h1><?php echo 'Usuários'; ?></h1>
 
 <?php echo $this->renderPartial('_menu', array(
 		'list'=> array(
@@ -16,11 +15,6 @@ $this->breadcrumbs=array(
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
 	'columns'=>array(
-		array(
-			'name' => 'id',
-			'type'=>'raw',
-			'value' => 'CHtml::link(CHtml::encode($data->id),array("admin/update","id"=>$data->id))',
-		),
 		array(
 			'name' => 'username',
 			'type'=>'raw',
@@ -38,14 +32,6 @@ $this->breadcrumbs=array(
 		array(
 			'name' => 'lastvisit',
 			'value' => 'date("d.m.Y H:i:s",$data->lastvisit)',
-		),
-		array(
-			'name'=>'status',
-			'value'=>'User::itemAlias("UserStatus",$data->status)',
-		),
-		array(
-			'name'=>'superuser',
-			'value'=>'User::itemAlias("AdminStatus",$data->superuser)',
 		),
 		array(
 			'class'=>'CButtonColumn',
