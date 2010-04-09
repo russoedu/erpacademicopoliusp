@@ -71,11 +71,11 @@ class aluno extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_aluno' => 'Id Aluno',
+			'id_aluno' => 'Número de Matrícula',
 			'nome' => 'Nome',
 			'rg' => 'Rg',
 			'cpf' => 'Cpf',
-			'endereco' => 'Endereco',
+			'endereco' => 'Endereço',
 			'telefone' => 'Telefone',
 			'celular' => 'Celular',
 			'email' => 'Email',

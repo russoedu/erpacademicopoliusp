@@ -121,6 +121,8 @@ class UserModule extends CWebModule {
             return 'aluno';
         else if (bibliotecario::model()->find('tbl_users_id = '. $user_id))
             return 'bibliotecario';
+        else if (gestoracademico::model()->find('tbl_users_id = '. $user_id))
+            return 'gestoracademico';
         else
             return 'guest';
     }

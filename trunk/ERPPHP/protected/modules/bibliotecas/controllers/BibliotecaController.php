@@ -217,6 +217,9 @@ class BibliotecaController extends Controller {
                 ),
                 'bibliotecario' =>array(
                 ),
+                'gestoracademico'=>array(
+                    
+                ),
                 'guest' => array(
                 )
         );

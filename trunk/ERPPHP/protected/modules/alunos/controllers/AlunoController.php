@@ -7,6 +7,7 @@ class AlunoController extends Controller {
      * @var CActiveRecord the currently loaded data model instance.
      */
     private $_model;
+    private $_grupo;
 
     /**
      * @return array action filters
@@ -48,6 +49,7 @@ class AlunoController extends Controller {
     public function actionView() {
         $this->render('view',array(
                 'model'=>$this->loadModel(),
+                'actions'=>$this->actions_view(),
         ));
     }
 
@@ -84,7 +86,7 @@ class AlunoController extends Controller {
                 $profile_data = Array(
                         'firstname'=>$nome_aluno[0],
                         'lastname'=>end($nome_aluno),
-                        
+
                 );
                 $profile_aluno->user_id = $user->id;
                 $profile_aluno->attributes=$profile_data;
@@ -94,14 +96,14 @@ class AlunoController extends Controller {
                 if($model->save()) {
                     $user_mod = User::model()->findByPk($profile_aluno->user_id);
                     $user_data = Array(
-                        'username'=>$model->id_aluno,
-                        'password'=>Yii::app()->getModule('user')->encrypting($model->id_aluno),
-                        'activkey'=>Yii::app()->getModule('user')->encrypting(microtime().$model->id_aluno),
-                        'email'=> $dados_aluno['email'],
-                        'createtime'=>time(),
-                        'lastvisit'=>time(),
-                        'superuser'=>0,
-                        'status'=>1,
+                            'username'=>$model->id_aluno,
+                            'password'=>Yii::app()->getModule('user')->encrypting($model->id_aluno),
+                            'activkey'=>Yii::app()->getModule('user')->encrypting(microtime().$model->id_aluno),
+                            'email'=> $dados_aluno['email'],
+                            'createtime'=>time(),
+                            'lastvisit'=>time(),
+                            'superuser'=>0,
+                            'status'=>1,
                     );
                     print_r($user_data);
                     $user_mod->attributes = $user_data;
@@ -161,6 +163,7 @@ class AlunoController extends Controller {
 
         $this->render('index',array(
                 'dataProvider'=>$dataProvider,
+                'actions'=>$this->actions_index()
         ));
     }
 
@@ -191,5 +194,68 @@ class AlunoController extends Controller {
                 throw new CHttpException(404,'The requested page does not exist.');
         }
         return $this->_model;
+    }
+
+        public function actions_view(){
+        $grupo = $this->loadGrupo();
+        $model = $this->loadModel();
+        $array_actions = array(
+            'admin' => array(
+                CHtml::link('Lista de Alunos',array('index')),
+                CHtml::link('Criar Aluno',array('create')),
+                CHtml::link('Atualizar Aluno',array('update','id'=>$model->id_aluno)),
+                CHtml::linkButton('Deletar Aluno',array('submit'=>array('delete','id'=>$model->id_aluno),'confirm'=>'Tem certeza?'))
+            ),
+            'aluno' =>array(
+                CHtml::link('Lista de Alunos',array('index')),
+            ),
+            'professor'=>array(
+                CHtml::link('Lista de Alunos',array('index')),
+            ),
+            'bibliotecario'=>array(
+
+            ),
+            'gestoracademico'=>array(
+                CHtml::link('Lista de Alunos',array('index')),
+                CHtml::link('Criar Aluno',array('create')),
+                CHtml::link('Atualizar Aluno',array('update','id'=>$model->id_aluno)),
+                CHtml::linkButton('Deletar Aluno',array('submit'=>array('delete','id'=>$model->id_aluno),'confirm'=>'Tem certeza?'))
+            ),
+            'guest'=>array(
+                CHtml::link('Lista de Alunos',array('index')),
+            ),
+
+        );
+        return $array_actions[$grupo];
+    }
+    
+    public function actions_index() {
+        $grupo = $this->loadGrupo();
+        $array_actions = array(
+                'admin' => array(
+                        CHtml::link('Criar Aluno',array('create')),
+                ),
+                'aluno' => array(
+                
+                ),
+                'professor' => array(
+                ),
+                'bibliotecario' =>array(
+                ),
+                'gestoracademico' =>array(
+                        CHtml::link('Criar Aluno',array('create')),
+                ),
+                'guest' => array(
+                )
+        );
+        return $array_actions[$grupo];
+    }
+
+    /**
+     * retorna o grupo e seta a variavel do grupo....
+     */
+    public function loadGrupo() {
+        $this->_grupo = Yii::App()->getModule('user')->getGrupo();
+        return $this->_grupo;
     }
 }
