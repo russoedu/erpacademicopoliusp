@@ -63,6 +63,7 @@
                 array('a'=>'Administrador',
                     'p'=>'Professor',
                     'b'=>'Bibliotecario',
+                    'g'=>'Gestor Academico',
                     )
                    
                 );
