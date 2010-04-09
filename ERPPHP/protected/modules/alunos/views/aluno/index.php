@@ -1,17 +1,22 @@
 <?php
 $this->breadcrumbs=array(
-	'Alunos',
+        'Alunos',
 );
 ?>
 
-<h1>List aluno</h1>
+<h1>Alunos</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('Create aluno',array('create')); ?></li>
-	<li><?php echo CHtml::link('Manage aluno',array('admin')); ?></li>
+    <?php
+    foreach ($actions as $action) {
+        echo "<li>";
+        echo $action;
+        echo "<li/>";
+    }
+    ?>
 </ul><!-- actions -->
 
 <?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
+        'dataProvider'=>$dataProvider,
+        'itemView'=>'_view',
 )); ?>
