@@ -104,6 +104,12 @@ class UserController extends Controller {
                             $bibliotecario->save();
                             break;
                         case 'g':
+                            $gestor = new gestoracademico;
+                            $gestor->nome = $_POST['Profile']['firstname'] . ' '.
+                                    $_POST['Profile']['lastname'];
+                            $gestor->tbl_users_id = $model->id;
+                            $gestor->id_gestor_academico = $_POST['id'];
+                            $gestor->save();
                             break;
                     }
                     $this->redirect(array('/user/admin'));
