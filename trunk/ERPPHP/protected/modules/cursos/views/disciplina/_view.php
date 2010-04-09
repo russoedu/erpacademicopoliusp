@@ -1,20 +1,17 @@
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_disciplina')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_disciplina), array('view', 'id'=>$data->id_disciplina)); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('nome')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->nome), array('view', 'id'=>$data->id_disciplina)); ?>
 	<br />
 
 	<b>Nome do Curso:</b>
 	<?php echo CHtml::encode(curso::model()->findByPk($data->id_curso)->nome);?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_professor_responsavel')); ?>:</b>
-	<?php echo CHtml::encode($data->id_professor_responsavel); ?>
+	<b><?php echo 'Professor Responsável'; ?>:</b>
+	<?php echo 'TODO'; ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('nome')); ?>:</b>
-	<?php echo CHtml::encode($data->nome); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('sigla')); ?>:</b>
 	<?php echo CHtml::encode($data->sigla); ?>

@@ -165,13 +165,15 @@ class DisciplinaController extends Controller {
         $model = $this->loadModel();
         $array_actions = array(
             'admin'=>array(
-                
                 CHtml::link('Criar oferecimento',array('/cursos/oferecimento/create','id_disciplina'=>$model->id_disciplina)),
             ),
             'professor'=>array(),
             'bibliotecario'=>array(),
             'guest'=>array(),
             'aluno'=>array(),
+            'gestoracademico'=>array(
+                CHtml::link('Criar oferecimento',array('/cursos/oferecimento/create','id_disciplina'=>$model->id_disciplina))
+                ,),
 
         );
         return $array_actions[$grupo];
@@ -190,6 +192,7 @@ class DisciplinaController extends Controller {
         return $array_actions[$grupo];
 
     }
+
 
 
 }
