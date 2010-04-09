@@ -4,11 +4,9 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>List oferecimento</h1>
+<h1>Listagem de oferecimentos</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('Create oferecimento',array('create')); ?></li>
-	<li><?php echo CHtml::link('Manage oferecimento',array('admin')); ?></li>
 </ul><!-- actions -->
 
 <?php $this->widget('zii.widgets.CListView', array(
