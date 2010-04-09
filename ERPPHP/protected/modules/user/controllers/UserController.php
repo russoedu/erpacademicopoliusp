@@ -103,6 +103,8 @@ class UserController extends Controller {
                             $bibliotecario->id_bibliotecario = $_POST['id'];
                             $bibliotecario->save();
                             break;
+                        case 'g':
+                            break;
                     }
                     $this->redirect(array('/user/admin'));
                 }
