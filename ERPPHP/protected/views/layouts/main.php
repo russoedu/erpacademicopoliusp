@@ -59,6 +59,7 @@
                                 array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
                                 array('label'=>'Usuários', 'url'=>array('/user/admin')),
                                 array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
+                                array('label'=>'Oferecimentos', 'url'=>array('/cursos/oferecimento')),
                                 array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
                                 array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>'Perfil'),
                                 array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')')

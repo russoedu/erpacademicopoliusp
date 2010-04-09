@@ -66,10 +66,10 @@ class oferecimento extends CActiveRecord
 	{
 		return array(
 			'id_oferecimento' => 'Id Oferecimento',
-			'id_disciplina' => 'Id Disciplina',
-			'id_professor' => 'Id Professor',
-			'id_turma' => 'Id Turma',
-			'id_sala' => 'Id Sala',
+			'id_disciplina' => 'Disciplina',
+			'id_professor' => 'Professor',
+			'id_turma' => 'Turma',
+			'id_sala' => 'Sala',
 			'data_inicio' => 'Data Inicio',
 			'data_fim' => 'Data Fim',
 			'vagas' => 'Vagas',
