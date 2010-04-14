@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Listagem de oferecimentos</h1>
+<h1>Oferecimentos</h1>
 
 <ul class="actions">
 </ul><!-- actions -->

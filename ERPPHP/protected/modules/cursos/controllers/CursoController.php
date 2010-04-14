@@ -157,7 +157,8 @@ class CursoController extends Controller {
                 CHtml::link('Lista de cursos',array('index')),
                 CHtml::link('Criar curso',array('create')),
                 CHtml::link('Atualizar curso',array('update','id'=>$model->id_curso)),
-                CHtml::linkButton('Deletar curso',array('submit'=>array('delete','id'=>$model->id_curso),'confirm'=>'Tem certeza?'))
+                CHtml::linkButton('Deletar curso',array('submit'=>array('delete','id'=>$model->id_curso),'confirm'=>'Tem certeza?')),
+                CHtml::link('Criar disciplina' , array('/cursos/disciplina/create', 'id_curso'=>$model->id_curso)),
             ),
             'aluno' =>array(
                 CHtml::link('Lista de cursos',array('index')),

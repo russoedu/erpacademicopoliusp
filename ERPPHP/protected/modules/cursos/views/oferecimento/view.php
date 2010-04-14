@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 	$model->id_oferecimento,
 );
 ?>
-<h1>View oferecimento #<?php echo $model->id_oferecimento; ?></h1>
+<h1>Oferecimento <?php echo $model->id_oferecimento; ?></h1>
 
 <ul class="actions">
 	<li><?php echo CHtml::link('List oferecimento',array('index')); ?></li>
