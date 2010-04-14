@@ -7,19 +7,16 @@
 	<?php echo CHtml::errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'id_curso'); ?>
-		<?php 
-			echo CHtml::activeDropDownList($model, 'id_curso',
-				CHtml::listData(
-					$cursos,'id_curso','nome')
-			); 
-		?>
-		<?php echo CHtml::error($model,'id_curso'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo CHtml::activeLabelEx($model,'id_professor_responsavel'); ?>
-		<?php echo CHtml::activeTextField($model,'id_professor_responsavel'); ?>
+
+                <?php
+			echo CHtml::activeDropDownList($model, 'id_professor_responsavel',
+				CHtml::listData(
+					$professores,'id_professor','nome')
+			);
+		?>
+
+
 		<?php echo CHtml::error($model,'id_professor_responsavel'); ?>
 	</div>
 

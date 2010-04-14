@@ -61,8 +61,12 @@ class DisciplinaController extends Controller {
      */
     public function actionCreate() {
         $model=new disciplina;
+        $id_curso = $_REQUEST['id_curso'];
+
         if(isset($_POST['disciplina'])) {
-            $model->attributes=$_POST['disciplina'];
+            $disciplina = $_POST['disciplina'];
+            $disciplina['id_curso'] = $id_curso;
+            $model->attributes=$disciplina;
             if($model->save())
                 $this->redirect(array('view','id'=>$model->id_disciplina));
         }
@@ -70,6 +74,7 @@ class DisciplinaController extends Controller {
         $this->render('create',array(
                 'model'=>$model,
                 'cursos'=>curso::model()->findAll(),
+                'professores'=>Yii::app()->getModule('user')->getProfessores(),
         ));
     }
 

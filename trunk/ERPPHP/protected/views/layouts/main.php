@@ -71,11 +71,19 @@
                                 array('label'=>'Bibliotecas','url'=>array('/bibliotecas/biblioteca')),
                                 array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>'Perfil'),
                                 array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')')
-                        )
+                        ),
+                        'gestoracademico'=>array(
+                                array('label'=>'Cursos', 'url'=>array('/cursos/curso')),
+                                array('label'=>'Disciplinas', 'url'=>array('/cursos/disciplina')),
+                                array('label'=>'Oferecimentos', 'url'=>array('/cursos/oferecimento')),
+                                array('label'=>'Alunos', 'url'=>array('/alunos/aluno')),
+                                array('url'=>Yii::app()->getModule('user')->profileUrl, 'label'=>'Perfil'),
+                                array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::app()->getModule('user')->t("Logout").' ('.Yii::app()->user->name.')')
+                        ),
                 );
                 $grupo = Yii::app()->getModule('user')->getGrupo();
                 $this->widget('zii.widgets.CMenu',array(
-                    //widget do menu de fato meu value!...
+                        //widget do menu de fato meu value!...
                         'items'=>$menu[$grupo]
 
                 )); ?>

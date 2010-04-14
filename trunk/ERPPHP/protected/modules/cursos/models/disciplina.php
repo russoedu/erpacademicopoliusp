@@ -69,12 +69,12 @@ class disciplina extends CActiveRecord
 	{
 		return array(
 			'id_disciplina' => 'Id Disciplina',
-			'id_curso' => 'Id Curso',
-			'id_professor_responsavel' => 'Id Professor Responsavel',
+			'id_curso' => 'Curso',
+			'id_professor_responsavel' => 'Professor Responsável',
 			'nome' => 'Nome',
 			'sigla' => 'Sigla',
-			'creditos_aula' => 'Creditos Aula',
-			'creditos_trabalho' => 'Creditos Trabalho',
+			'creditos_aula' => 'Créditos Aula',
+			'creditos_trabalho' => 'Créditos Trabalho',
 			'semestre' => 'Semestre',
 			'programa' => 'Programa',
 		);
