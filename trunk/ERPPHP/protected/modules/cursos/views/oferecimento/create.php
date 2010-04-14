@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 	'Novo oferecimento',
 );
 ?>
-<h1>Create oferecimento</h1>
+<h1>Criar oferecimento</h1>
 
 <ul class="actions">
 </ul><!-- actions -->

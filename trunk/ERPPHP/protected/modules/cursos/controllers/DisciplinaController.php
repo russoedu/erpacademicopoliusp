@@ -93,6 +93,7 @@ class DisciplinaController extends Controller {
         $this->render('update',array(
                 'model'=>$model,
                 'cursos'=>curso::model()->findAll(),
+                'professores'=>Yii::app()->getModule('user')->getProfessores()
         ));
     }
 
@@ -165,33 +166,35 @@ class DisciplinaController extends Controller {
         return $this->_grupo;
     }
 
-    public function actions_view(){
+    public function actions_view() {
         $grupo = $this->loadGrupo();
         $model = $this->loadModel();
         $array_actions = array(
-            'admin'=>array(
-                CHtml::link('Criar oferecimento',array('/cursos/oferecimento/create','id_disciplina'=>$model->id_disciplina)),
-            ),
-            'professor'=>array(),
-            'bibliotecario'=>array(),
-            'guest'=>array(),
-            'aluno'=>array(),
-            'gestoracademico'=>array(
-                CHtml::link('Criar oferecimento',array('/cursos/oferecimento/create','id_disciplina'=>$model->id_disciplina))
+                'admin'=>array(
+                        CHtml::link('Criar oferecimento',array('/cursos/oferecimento/create','id_disciplina'=>$model->id_disciplina)),
+                ),
+                'professor'=>array(),
+                'bibliotecario'=>array(),
+                'guest'=>array(),
+                'aluno'=>array(),
+                'gestoracademico'=>array(
+                        CHtml::link('Atualizar Disciplina', array('update', 'id'=>$model->id_disciplina)),
+                        CHtml::link('Criar oferecimento',array('/cursos/oferecimento/create','id_disciplina'=>$model->id_disciplina))
                 ,),
 
         );
         return $array_actions[$grupo];
     }
 
-    public function actions_index(){
+    public function actions_index() {
         $grupo = $this->loadGrupo();
         $array_actions = array(
-            'admin'=>array(),
-            'professor'=>array(),
-            'bibliotecario'=>array(),
-            'guest'=>array(),
-            'aluno'=>array(),
+                'admin'=>array(),
+                'professor'=>array(),
+                'bibliotecario'=>array(),
+                'guest'=>array(),
+                'aluno'=>array(),
+                'gestoracademico'=>array(),
 
         );
         return $array_actions[$grupo];

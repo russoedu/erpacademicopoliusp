@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Update oferecimento <?php echo $model->id_oferecimento; ?></h1>
+<h1>Atualizar oferecimento <?php echo $model->id_oferecimento; ?></h1>
 
 <ul class="actions">
 	<li><?php echo CHtml::link('List oferecimento',array('index')); ?></li>

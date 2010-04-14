@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 	$model->id_disciplina,
 );
 ?>
-<h1>View disciplina #<?php echo $model->id_disciplina; ?></h1>
+<h1>Disciplina <?php echo $model->nome; ?></h1>
 
 <ul class="actions">
 	    <?php
@@ -19,8 +19,6 @@ $this->breadcrumbs=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_disciplina',
-		'id_curso',
 		'id_professor_responsavel',
 		'nome',
 		'sigla',
