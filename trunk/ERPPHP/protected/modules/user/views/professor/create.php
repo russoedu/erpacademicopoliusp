@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 <h1>Create professor</h1>
 
 <ul class="actions">
-	<li><?php echo CHtml::link('List professor',array('index')); ?></li>
-	<li><?php echo CHtml::link('Manage professor',array('admin')); ?></li>
+	<li><?php echo CHtml::link('Listar professores',array('index')); ?></li>
+	<li><?php echo CHtml::link('Gerenciar professores',array('admin')); ?></li>
 </ul><!-- actions -->
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

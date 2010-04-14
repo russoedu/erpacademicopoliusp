@@ -63,17 +63,6 @@ $this->breadcrumbs=array(
 			}
 		}
 ?>
-	<?php if(extension_loaded('gd')): ?>
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($form,'verifyCode'); ?>
-		<div>
-		<?php $this->widget('CCaptcha'); ?>
-		<?php echo CHtml::activeTextField($form,'verifyCode'); ?>
-		</div>
-		<p class="hint"><?php echo UserModule::t("Please enter the letters as they are shown in the image above."); ?>
-		<br/><?php echo UserModule::t("Letters are not case-sensitive."); ?></p>
-	</div>
-	<?php endif; ?>
 	
 	<div class="row submit">
 		<?php echo CHtml::submitButton(UserModule::t("Registration")); ?>
