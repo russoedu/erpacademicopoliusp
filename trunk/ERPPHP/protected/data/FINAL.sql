@@ -103,13 +103,14 @@ CREATE TABLE `curso` (
   `periodo` varchar(15) NOT NULL,
   `descricao` text,
   PRIMARY KEY (`id_curso`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `curso`
 --
 
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
+INSERT INTO `curso` VALUES  (1,'asasa',12,'1','SASAS');
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 
 
@@ -217,6 +218,7 @@ CREATE TABLE `gestoracademico` (
 --
 
 /*!40000 ALTER TABLE `gestoracademico` DISABLE KEYS */;
+INSERT INTO `gestoracademico` VALUES  (2,'gestor de merda',10);
 /*!40000 ALTER TABLE `gestoracademico` ENABLE KEYS */;
 
 
@@ -228,7 +230,7 @@ DROP TABLE IF EXISTS `horario`;
 CREATE TABLE `horario` (
   `id_horario` int(11) NOT NULL,
   `id_oferecimento` int(11) NOT NULL,
-  `dia` enum('SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA','SÁBADO') NOT NULL DEFAULT 'SEGUNDA',
+  `dia` enum('SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA','SÁBADO') NOT NULL DEFAULT 'SEGUNDA',
   `horario_inicio` time NOT NULL,
   `horario_fim` time NOT NULL,
   PRIMARY KEY (`id_horario`) USING BTREE,
@@ -347,6 +349,7 @@ CREATE TABLE `professor` (
 --
 
 /*!40000 ALTER TABLE `professor` DISABLE KEYS */;
+INSERT INTO `professor` VALUES  (1,'professor primeiro',9);
 /*!40000 ALTER TABLE `professor` ENABLE KEYS */;
 
 
@@ -369,7 +372,9 @@ CREATE TABLE `profiles` (
 
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
 INSERT INTO `profiles` VALUES  (1,'Admin','Administrator',''),
- (2,'Demo','Demo','');
+ (2,'Demo','Demo',''),
+ (9,'primeiro','professor',NULL),
+ (10,'de merda','gestor',NULL);
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 
 
@@ -428,15 +433,17 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`),
   KEY `superuser` (`superuser`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES  (1,'admin','21232f297a57a5a743894a0e4a801fc3','webmaster@example.com','9a24eff8c15a6a141ece27eb6947da0f',1261146094,1268486985,1,1),
- (2,'demo','fe01ce2a7fbac8fafaed7c982a04e229','demo@example.com','099f825543f7850cc038b90aaff39fac',1261146094,1261146094,0,1);
+INSERT INTO `users` VALUES  (1,'admin','21232f297a57a5a743894a0e4a801fc3','webmaster@example.com','9a24eff8c15a6a141ece27eb6947da0f',1261146094,1271268679,1,1),
+ (2,'demo','fe01ce2a7fbac8fafaed7c982a04e229','demo@example.com','099f825543f7850cc038b90aaff39fac',1261146094,1261146094,0,1),
+ (9,'professor','3f9cd3c7b11eb1bae99dddb3d05da3c5','professor@erp.com','74089523538e58951f3e579141e43ef9',1271268816,1271268816,0,1),
+ (10,'gestor','a55607442fca264cf37e935503d646c2','gestor@erp.com','d9db3834cd416703121de97d452ae857',1271268864,1271268875,0,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
