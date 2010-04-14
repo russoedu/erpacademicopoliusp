@@ -11,4 +11,5 @@ $this->breadcrumbs=array(
 	<li><?php echo CHtml::link('Manage disciplina',array('admin')); ?></li>
 </ul><!-- actions -->
 
-<?php echo $this->renderPartial('_form', array('model'=>$model, 'cursos'=>$cursos)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'cursos'=>$cursos
+        , 'professores'=>$professores)); ?>
