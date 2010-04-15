@@ -65,7 +65,7 @@ class oferecimento extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_oferecimento' => 'Id Oferecimento',
+			'id_oferecimento' => 'Oferecimento',
 			'id_disciplina' => 'Disciplina',
 			'id_professor' => 'Professor',
 			'id_turma' => 'Turma',

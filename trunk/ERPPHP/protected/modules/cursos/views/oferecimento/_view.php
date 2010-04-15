@@ -1,12 +1,10 @@
 <div class="view">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_oferecimento')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id_oferecimento), array('view', 'id'=>$data->id_oferecimento)); ?>
+	<?php echo CHtml::link(CHtml::encode(disciplina::model()->findByPk($data->id_disciplina)->nome . '-' .$data->id_turma),
+                array('view', 'id'=>$data->id_oferecimento)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_disciplina')); ?>:</b>
-	<?php echo CHtml::encode($data->id_disciplina); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_professor')); ?>:</b>
 	<?php echo CHtml::encode($data->id_professor); ?>

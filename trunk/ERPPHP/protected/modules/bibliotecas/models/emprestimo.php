@@ -64,7 +64,7 @@ class emprestimo extends CActiveRecord
 			'id_emprestimo' => 'Id Empréstimo',
 			'data_retirada' => 'Data de Retirada',
 			'data_devolucao' => 'Data de Devolução',
-			'id_aluno' => 'Id Aluno',
+			'id_aluno' => 'Número de matrícula do Aluno',
 			'id_livro' => 'Id Livro',
                         'data_devolucao_efetiva' => 'Data de Devolução Efetiva',
 		);

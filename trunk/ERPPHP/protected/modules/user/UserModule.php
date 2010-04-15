@@ -132,4 +132,9 @@ class UserModule extends CWebModule {
         return professor::model()->findAll();
     }
 
+    public function getProfessor($id){
+        return professor::model()->findByPk($id);
+    }
+
+
 }
