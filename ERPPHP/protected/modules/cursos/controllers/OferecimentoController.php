@@ -51,6 +51,7 @@ class OferecimentoController extends Controller {
     public function actionView() {
         $this->render('view',array(
                 'model'=>$this->loadModel(),
+            'actions'=>$this->actions_view(),
         ));
     }
 
@@ -88,14 +89,23 @@ class OferecimentoController extends Controller {
      */
     public function actionUpdate() {
         $model=$this->loadModel();
+         $professores_temp = Yii::App()->getModule('user')->getProfessores();
+        $professores = array();
+        foreach ($professores_temp as $professor) {
+            $professores[$professor->id_professor]=$professor->nome;
+        }
         if(isset($_POST['oferecimento'])) {
-            $model->attributes=$_POST['oferecimento'];
+            $oferecimento = $_POST['oferecimento'];
+            $oferecimento['data_inicio'] = date('Y-m-d',strtotime(str_replace('/', '-', $oferecimento['data_inicio'])));
+            $oferecimento['data_fim'] = date('Y-m-d',strtotime(str_replace('/', '-', $oferecimento['data_fim'])));
+            $model->attributes=$oferecimento;
             if($model->save())
                 $this->redirect(array('view','id'=>$model->id_oferecimento));
         }
 
         $this->render('update',array(
                 'model'=>$model,
+            'professores'=>$professores
         ));
     }
 
@@ -174,5 +184,28 @@ class OferecimentoController extends Controller {
         
     }
 
+    public function actions_view(){
+        $grupo = $this->loadGrupo();
+        $model = $this->loadModel();
+        $array_actions = array(
+            'admin'=>array(
+                CHtml::link('Listar oferecimentos',array('index')),
+                CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
+                CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
+            ),
+            'guest'=>array(),
+            'professor'=>array(),
+            'gestoracademico'=>array(
+                CHtml::link('Listar oferecimentos',array('index')),
+                CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
+                CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
+            ),
+            'aluno'=>array(
+                CHtml::link('Listar oferecimentos',array('index')),
+            ),
+            'bibliotecario'=>array(),
+        );
+        return $array_actions[$grupo];
+    }
 
 }

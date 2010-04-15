@@ -9,7 +9,7 @@
 	<br />
 
 	<b><?php echo 'Professor Responsável'; ?>:</b>
-	<?php echo 'TODO'; ?>
+	<?php echo Yii::App()->getModule('user')->getProfessor($data->id_professor_responsavel)->nome; ?>
 	<br />
 
 
