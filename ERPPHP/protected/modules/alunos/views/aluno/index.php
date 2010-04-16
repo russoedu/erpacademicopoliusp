@@ -1,10 +1,10 @@
 <?php
 $this->breadcrumbs=array(
-        'Alunos',
+	'Alunos',
 );
 ?>
 
-<h1>Alunos</h1>
+<h1>Listagem de Alunos</h1>
 
 <ul class="actions">
     <?php
@@ -17,6 +17,6 @@ $this->breadcrumbs=array(
 </ul><!-- actions -->
 
 <?php $this->widget('zii.widgets.CListView', array(
-        'dataProvider'=>$dataProvider,
-        'itemView'=>'_view',
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_view',
 )); ?>
