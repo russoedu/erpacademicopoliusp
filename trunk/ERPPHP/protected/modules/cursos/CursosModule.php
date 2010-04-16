@@ -11,6 +11,8 @@ class CursosModule extends CWebModule
 		$this->setImport(array(
 			'cursos.models.*',
 			'cursos.components.*',
+                        'alunos.models.*',
+                        'alunos.components.*',
 		));
 	}
 

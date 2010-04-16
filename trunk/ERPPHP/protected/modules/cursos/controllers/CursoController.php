@@ -18,30 +18,31 @@ class CursoController extends Controller {
         );
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
-    public function accessRules() {
-        return array(
-                array('allow',  // allow all users to perform 'index' and 'view' actions
-                        'actions'=>array('index','view'),
-                        'users'=>array('*'),
-                ),
-                array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                        'actions'=>array('create','update'),
-                        'users'=>array('@'),
-                ),
-                array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                        'actions'=>array('admin','delete'),
-                        'users'=>array('admin'),
-                ),
-                array('deny',  // deny all users
-                        'users'=>array('*'),
-                ),
-        );
-    }
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array(),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('index','view','create','update','CreateMatricula','UpdateMatricula','indexMatriculaAluno','delete', 'DeleteMatricula'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('index','view','create','update','CreateMatricula','UpdateMatricula','indexMatriculaAluno','delete', 'DeleteMatricula'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 
     /**
      * Displays a particular model.
@@ -117,21 +118,6 @@ class CursoController extends Controller {
         $this->render('index',array(
                 'dataProvider'=>$dataProvider,
             'actions'=>$this->actions_index()
-        ));
-    }
-
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin() {
-        $dataProvider=new CActiveDataProvider('curso', array(
-                        'pagination'=>array(
-                                'pageSize'=>self::PAGE_SIZE,
-                        ),
-        ));
-
-        $this->render('admin',array(
-                'dataProvider'=>$dataProvider,
         ));
     }
 
@@ -213,4 +199,125 @@ class CursoController extends Controller {
         $this->_grupo = Yii::App()->getModule('user')->getGrupo();
         return $this->_grupo;
     }
+
+        public function actionCreateMatricula()
+        {
+            $model=new curso_aluno;
+
+            if(isset($_REQUEST['id_aluno']))
+                $model->id_aluno = $_REQUEST['id_aluno'];
+
+            if(isset($_POST['curso_aluno'])){
+                $model->attributes=$_POST['curso_aluno'];
+                if($model->ano_fim == '')
+                    $model->ano_fim = null;
+                if($model->semestre_fim == '')
+                    $model->semestre_fim = null;
+                if($model->save())
+                    $this->redirect(array('/alunos/aluno/view','id'=>$model->id_aluno));
+            }
+
+            
+            $cursos=curso::model()->findAllBySql('SELECT * FROM curso ORDER BY nome');
+            $aluno=aluno::model()->findByPk($model->id_aluno);
+    
+            $this->render('createMatricula',array(
+			'model'=>$model,'cursos'=>$cursos,'aluno'=>$aluno,
+		));
+        }
+
+        public function actionUpdateMatricula()
+        {
+            $model=new curso_aluno;
+
+            if(isset($_REQUEST['id_curso']) && isset($_REQUEST['id_aluno']))
+                $model=curso_aluno::model()->find('id_aluno=:id_aluno and id_curso=:id_curso',
+                        array(':id_curso'=>$_REQUEST['id_curso'], ':id_aluno'=>$_REQUEST['id_aluno']));
+
+            if(isset($_POST['curso_aluno'])){
+                $model->attributes=$_POST['curso_aluno'];
+                 if($model->ano_fim == '')
+                    $model->ano_fim = null;
+                if($model->semestre_fim == '')
+                    $model->semestre_fim = null;
+                if($model->save())
+                    $this->redirect(array('/alunos/aluno/view','id'=>$model->id_aluno));
+            }
+
+            $cursos=curso::model()->findAllBySql('SELECT * FROM curso ORDER BY nome');
+            $aluno=aluno::model()->findByPk($_REQUEST['id_aluno']);
+
+            $this->render('updateMatricula',array(
+			'model'=>$model,'cursos'=>$cursos,'aluno'=>$aluno,
+		));
+        }
+
+        public function actionIndexMatriculaAluno()
+        {
+            if(isset($_REQUEST['id_aluno'])){
+                $aluno=aluno::model()->findByPk($_REQUEST['id_aluno']);
+
+                $cursos=curso::model()->findAll();
+
+                $dataProvider=new CActiveDataProvider('curso_aluno', array(
+                        'criteria'=>array(
+                            'condition'=>'id_aluno = :id_aluno',
+                            'params'=>array(':id_aluno'=>$_GET['id_aluno'],),
+                        ),
+                        'pagination'=>array(
+                                'pageSize'=>self::PAGE_SIZE,
+                        ),
+
+                    )
+                );
+
+                 $this->render('indexMatriculaAluno',array(
+			'dataProvider'=>$dataProvider, 'aluno'=>$aluno, 'cursos'=>$cursos,
+                        'actions'=>$this->actions_indexMatricula($aluno->id_aluno),
+		));
+            }
+        }
+
+
+        public function actionDeleteMatricula()
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			//$this->loadModel()->delete();
+                        $curso_aluno=curso_aluno::model()->findByPk(array('id_aluno'=>$_REQUEST['id_aluno'], 'id_curso'=>$_REQUEST['id_curso']));
+
+                        $curso_aluno->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_POST['ajax']))
+				$this->redirect(array('indexMatriculaAluno','id'=>$_REQUEST['id_aluno']));
+                        
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+
+        public function actions_indexMatricula($id_aluno) {
+        $grupo = $this->loadGrupo();
+        $array_actions = array(
+                'admin' => array(
+                        CHtml::link('Nova Matrícula',array('createMatricula', 'id_aluno'=>$id_aluno )),
+                ),
+                'aluno' => array(
+
+                ),
+                'professor' => array(
+                ),
+                'bibliotecario' =>array(
+                ),
+                'gestoracademico' =>array(
+                        CHtml::link('Nova Matrícula',array('createMatricula', 'id_aluno'=>$id_aluno )),
+                ),
+                'guest' => array(
+                )
+        );
+        return $array_actions[$grupo];
+    }
+
 }

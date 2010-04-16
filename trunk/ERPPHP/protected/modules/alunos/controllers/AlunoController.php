@@ -26,15 +26,15 @@ class AlunoController extends Controller {
     public function accessRules() {
         return array(
                 array('allow',  // allow all users to perform 'index' and 'view' actions
-                        'actions'=>array('index','view'),
+                        'actions'=>array(),
                         'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                        'actions'=>array('create','update'),
+                        'actions'=>array('index','view','create','update','delete'),
                         'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                        'actions'=>array('admin','delete'),
+                        'actions'=>array('index','view','create','update','delete'),
                         'users'=>array('admin'),
                 ),
                 array('deny',  // deny all users
@@ -47,9 +47,11 @@ class AlunoController extends Controller {
      * Displays a particular model.
      */
     public function actionView() {
+
+        $actions = $this->actions_view();
+
         $this->render('view',array(
-                'model'=>$this->loadModel(),
-                'actions'=>$this->actions_view(),
+                'model'=>$this->loadModel(), 'actions'=>$actions,
         ));
     }
 
@@ -86,7 +88,7 @@ class AlunoController extends Controller {
                 $profile_data = Array(
                         'firstname'=>$nome_aluno[0],
                         'lastname'=>end($nome_aluno),
-
+                        
                 );
                 $profile_aluno->user_id = $user->id;
                 $profile_aluno->attributes=$profile_data;
@@ -96,14 +98,14 @@ class AlunoController extends Controller {
                 if($model->save()) {
                     $user_mod = User::model()->findByPk($profile_aluno->user_id);
                     $user_data = Array(
-                            'username'=>$model->id_aluno,
-                            'password'=>Yii::app()->getModule('user')->encrypting($model->id_aluno),
-                            'activkey'=>Yii::app()->getModule('user')->encrypting(microtime().$model->id_aluno),
-                            'email'=> $dados_aluno['email'],
-                            'createtime'=>time(),
-                            'lastvisit'=>time(),
-                            'superuser'=>0,
-                            'status'=>1,
+                        'username'=>$model->id_aluno,
+                        'password'=>Yii::app()->getModule('user')->encrypting($model->id_aluno),
+                        'activkey'=>Yii::app()->getModule('user')->encrypting(microtime().$model->id_aluno),
+                        'email'=> $dados_aluno['email'],
+                        'createtime'=>time(),
+                        'lastvisit'=>time(),
+                        'superuser'=>0,
+                        'status'=>1,
                     );
                     print_r($user_data);
                     $user_mod->attributes = $user_data;
@@ -161,26 +163,13 @@ class AlunoController extends Controller {
                         ),
         ));
 
+        $actions = $this->actions_index();
+
         $this->render('index',array(
-                'dataProvider'=>$dataProvider,
-                'actions'=>$this->actions_index()
+                'dataProvider'=>$dataProvider, 'actions'=>$actions,
         ));
     }
 
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin() {
-        $dataProvider=new CActiveDataProvider('aluno', array(
-                        'pagination'=>array(
-                                'pageSize'=>self::PAGE_SIZE,
-                        ),
-        ));
-
-        $this->render('admin',array(
-                'dataProvider'=>$dataProvider,
-        ));
-    }
 
     /**
      * Returns the data model based on the primary key given in the GET variable.
@@ -196,66 +185,56 @@ class AlunoController extends Controller {
         return $this->_model;
     }
 
-        public function actions_view(){
-        $grupo = $this->loadGrupo();
-        $model = $this->loadModel();
-        $array_actions = array(
-            'admin' => array(
-                CHtml::link('Lista de Alunos',array('index')),
-                CHtml::link('Criar Aluno',array('create')),
-                CHtml::link('Atualizar Aluno',array('update','id'=>$model->id_aluno)),
-                CHtml::linkButton('Deletar Aluno',array('submit'=>array('delete','id'=>$model->id_aluno),'confirm'=>'Tem certeza?'))
-            ),
-            'aluno' =>array(
-                CHtml::link('Lista de Alunos',array('index')),
-            ),
-            'professor'=>array(
-                CHtml::link('Lista de Alunos',array('index')),
-            ),
-            'bibliotecario'=>array(
-
-            ),
-            'gestoracademico'=>array(
-                CHtml::link('Lista de Alunos',array('index')),
-                CHtml::link('Criar Aluno',array('create')),
-                CHtml::link('Atualizar Aluno',array('update','id'=>$model->id_aluno)),
-                CHtml::linkButton('Deletar Aluno',array('submit'=>array('delete','id'=>$model->id_aluno),'confirm'=>'Tem certeza?'))
-            ),
-            'guest'=>array(
-                CHtml::link('Lista de Alunos',array('index')),
-            ),
-
-        );
-        return $array_actions[$grupo];
-    }
-    
-    public function actions_index() {
-        $grupo = $this->loadGrupo();
-        $array_actions = array(
-                'admin' => array(
-                        CHtml::link('Criar Aluno',array('create')),
-                ),
-                'aluno' => array(
-                
-                ),
-                'professor' => array(
-                ),
-                'bibliotecario' =>array(
-                ),
-                'gestoracademico' =>array(
-                        CHtml::link('Criar Aluno',array('create')),
-                ),
-                'guest' => array(
-                )
-        );
-        return $array_actions[$grupo];
-    }
-
     /**
      * retorna o grupo e seta a variavel do grupo....
      */
     public function loadGrupo() {
         $this->_grupo = Yii::App()->getModule('user')->getGrupo();
         return $this->_grupo;
+    }
+
+
+    /**
+     * retorna as ações para a página actionview, conforme o grupo...
+     */
+    public function actions_view() {
+        $grupo = $this->loadGrupo();
+        $model = $this->loadModel();
+        $array_actions = array(
+                'admin' => array(
+                    CHtml::link('Atualizar Aluno',array('update','id'=>$model->id_aluno)),
+                    CHtml::link('Gerenciar Matrículas',array('/cursos/curso/indexMatriculaAluno','id_aluno'=>$model->id_aluno)),
+                    CHtml::linkButton('Remover Aluno',array('submit'=>array('delete','id'=>$model->id_aluno),'confirm'=>'Deseja realmente remover este aluno?')),
+                ),
+                'aluno' => array(),
+                'professor' => array(),
+                'bibliotecario' =>array(),
+                'gestoracademico' => array(
+                    CHtml::link('Atualizar Aluno',array('update','id'=>$model->id_aluno)),
+                    CHtml::link('Gerenciar Matrículas',array('/cursos/curso/indexMatriculaAluno','id_aluno'=>$model->id_aluno)),
+                    CHtml::linkButton('Remover Aluno',array('submit'=>array('delete','id'=>$model->id_aluno),'confirm'=>'Are you sure to delete this item?')),
+
+                ),
+                'guest' => array()
+        );
+
+        return $array_actions[$grupo];
+    }
+
+    public function actions_index(){
+        $grupo = $this->loadGrupo();
+        $array_actions = array(
+                'admin' => array(
+                    CHtml::link('Criar Aluno',array('create')),
+                ),
+                'aluno' => array(),
+                'professor' => array(),
+                'bibliotecario' =>array(),
+                'gestoracademico' =>array(
+                    CHtml::link('Criar Aluno',array('create')),
+                ),
+                'guest' => array()
+        );
+        return $array_actions[$grupo];
     }
 }

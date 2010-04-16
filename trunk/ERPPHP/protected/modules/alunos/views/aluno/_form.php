@@ -2,7 +2,7 @@
 
 <?php echo CHtml::beginForm(); ?>
 
-	<p class="note">Campos com <span class="required">*</span> s√£o obrigat√≥rios.</p>
+	<p class="note">Campos com <span class="required">*</span> s„o obrigatÛrios.</p>
 
 	<?php echo CHtml::errorSummary($model); ?>
 
@@ -50,7 +50,7 @@
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Criar' : 'Salvar'); ?>
+		<?php echo CHtml::submitButton('Enviar'); ?>
 	</div>
 
 <?php echo CHtml::endForm(); ?>

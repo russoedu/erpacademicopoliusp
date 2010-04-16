@@ -78,7 +78,7 @@ class aluno extends CActiveRecord
 			'endereco' => 'Endereço',
 			'telefone' => 'Telefone',
 			'celular' => 'Celular',
-			'email' => 'Email',
+			'email' => 'E-mail',
 			'tbl_users_id' => 'Tbl Users',
 		);
 	}

@@ -10,6 +10,8 @@ class AlunosModule extends CWebModule {
         $this->setImport(array(
                 'alunos.models.*',
                 'alunos.components.*',
+                'cursos.models.*',
+                'cursos.components.*',
         ));
     }
 

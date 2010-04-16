@@ -65,10 +65,10 @@ class curso_aluno extends CActiveRecord
 			'id_curso' => 'Id Curso',
 			'id_aluno' => 'Id Aluno',
 			'status' => 'Status',
-			'ano_inicio' => 'Ano Inicio',
-			'semestre_inicio' => 'Semestre Inicio',
-			'ano_fim' => 'Ano Fim',
-			'semestre_fim' => 'Semestre Fim',
+			'ano_inicio' => 'Ano de Início',
+			'semestre_inicio' => 'Semestre de Início',
+			'ano_fim' => 'Ano de Término',
+			'semestre_fim' => 'Semestre de Término',
 		);
 	}
 }
