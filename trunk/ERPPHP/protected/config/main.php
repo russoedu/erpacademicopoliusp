@@ -22,7 +22,7 @@ return array(
                         'registrationUrl' => array('/user/registration'),    # registration path
                         #'recoveryUrl' => array('/user/recovery'),            # recovery password path
                         'loginUrl' => array('/user/login'),                  # login form path
-                        'returnUrl' => array('/user/profile'),               # page after login
+                        'returnUrl' => array('/'),               # page after login
                         'returnLogoutUrl' => array('/user/login'),           # page after logout
                 ),),
         // preloading 'log' component

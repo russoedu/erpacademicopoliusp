@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.1.44-community
@@ -17,8 +17,8 @@
 --
 -- Create schema erp
 --
-
-CREATE DATABASE IF NOT EXISTS erp;
+DROP DATABASE IF EXISTS erp;
+CREATE DATABASE erp;
 USE erp;
 
 --
@@ -228,7 +228,7 @@ INSERT INTO `gestoracademico` VALUES  (2,'gestor de merda',10);
 
 DROP TABLE IF EXISTS `horario`;
 CREATE TABLE `horario` (
-  `id_horario` int(11) NOT NULL,
+  `id_horario` int(11) NOT NULL AUTO_INCREMENT,
   `id_oferecimento` int(11) NOT NULL,
   `dia` enum('SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA','SÁBADO') NOT NULL DEFAULT 'SEGUNDA',
   `horario_inicio` time NOT NULL,

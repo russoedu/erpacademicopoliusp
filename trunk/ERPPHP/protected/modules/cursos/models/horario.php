@@ -36,9 +36,9 @@ class horario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_horario, id_oferecimento, horario_inicio, horario_fim', 'required'),
-			array('id_horario, id_oferecimento', 'numerical', 'integerOnly'=>true),
-			array('dia', 'length', 'max'=>7),
+			array('id_oferecimento, horario_inicio, horario_fim', 'required'),
+			array('id_oferecimento', 'numerical', 'integerOnly'=>true),
+			array('dia', 'length', 'max'=>9),
 		);
 	}
 
