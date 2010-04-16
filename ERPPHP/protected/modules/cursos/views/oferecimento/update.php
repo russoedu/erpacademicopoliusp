@@ -12,4 +12,6 @@ $this->breadcrumbs=array(
 </ul><!-- actions -->
 
 <?php echo $this->renderPartial('_form', array('model'=>$model
-        , 'professores'=>$professores)); ?>
+        , 'professores'=>$professores,
+        'diaSemana'=>$diaSemana
+    )); ?>

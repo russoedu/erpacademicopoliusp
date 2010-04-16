@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Oferecimentos'=>array('index'),
-	'Novo oferecimento',
+        'Oferecimentos'=>array('index'),
+        'Novo oferecimento',
 );
 ?>
 <h1>Criar oferecimento</h1>
@@ -9,5 +9,8 @@ $this->breadcrumbs=array(
 <ul class="actions">
 </ul><!-- actions -->
 
-<?php echo $this->renderPartial('_form', array('model'=>$model,
-        'professores'=>$professores)); ?>
+<?php echo $this->renderPartial('_form',
+array('model'=>$model,
+'professores'=>$professores,
+'diaSemana'=>$diaSemana,
+)); ?>

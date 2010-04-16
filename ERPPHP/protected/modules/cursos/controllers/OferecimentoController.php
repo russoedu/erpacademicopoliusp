@@ -10,6 +10,7 @@ class OferecimentoController extends Controller {
      */
     private $_model;
     private $_grupo;
+    private $_horario;
 
     /**
      * @return array action filters
@@ -51,7 +52,7 @@ class OferecimentoController extends Controller {
     public function actionView() {
         $this->render('view',array(
                 'model'=>$this->loadModel(),
-            'actions'=>$this->actions_view(),
+                'actions'=>$this->actions_view(),
         ));
     }
 
@@ -60,27 +61,45 @@ class OferecimentoController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model=new oferecimento;
+        $model =new oferecimento;
+        $horario =new horario;
         $id_disciplina = $_REQUEST['id_disciplina'];
         $professores_temp = Yii::App()->getModule('user')->getProfessores();
         $professores = array();
         foreach ($professores_temp as $professor) {
             $professores[$professor->id_professor]=$professor->nome;
         }
+        $diaSemana = null;
         if(isset($_POST['oferecimento'])) {
+
             $oferecimento = $_POST['oferecimento'];
             $oferecimento['id_disciplina'] = $id_disciplina;
             $oferecimento['data_inicio'] = date('Y-m-d',strtotime(str_replace('/', '-', $oferecimento['data_inicio'])));
             $oferecimento['data_fim'] = date('Y-m-d',strtotime(str_replace('/', '-', $oferecimento['data_fim'])));
-            $model->attributes=$oferecimento;
-            if($model->save())
+            $diaSemana = $_POST['dia_semana'];
+
+            $model->attributes = $oferecimento;
+            if($model->save()) {
+                $horario_data = array(
+                        'dia'=>$diaSemana,
+                        'id_oferecimento' =>$model->id_oferecimento,
+                        'horario_inicio' => '5:00:00',
+                        'horario_fim' =>'5:00:00',
+                );
+                $horario->attributes = $horario_data;
+
+                $horario->save();
                 $this->redirect(array('view','id'=>$model->id_oferecimento));
+            }
         }
 
         $this->render('create',array(
                 'model'=>$model,
                 'professores'=>$professores,
+                'diaSemana'=>$diaSemana,
         ));
+
+
     }
 
     /**
@@ -89,7 +108,9 @@ class OferecimentoController extends Controller {
      */
     public function actionUpdate() {
         $model=$this->loadModel();
-         $professores_temp = Yii::App()->getModule('user')->getProfessores();
+        $horario = horario::model()->find('id_oferecimento = ' . $model->id_oferecimento);
+        
+        $professores_temp = Yii::App()->getModule('user')->getProfessores();
         $professores = array();
         foreach ($professores_temp as $professor) {
             $professores[$professor->id_professor]=$professor->nome;
@@ -105,7 +126,8 @@ class OferecimentoController extends Controller {
 
         $this->render('update',array(
                 'model'=>$model,
-            'professores'=>$professores
+                'professores'=>$professores,
+                'diaSemana'=>$horario->dia,
         ));
     }
 
@@ -162,8 +184,10 @@ class OferecimentoController extends Controller {
      */
     public function loadModel() {
         if($this->_model===null) {
-            if(isset($_GET['id']))
+            if(isset($_GET['id'])){
                 $this->_model=oferecimento::model()->findbyPk($_GET['id']);
+                $this->_horario = horario::model()->find('id_oferecimento='.$_GET['id']);
+            }
             if($this->_model===null)
                 throw new CHttpException(404,'The requested page does not exist.');
         }
@@ -180,30 +204,30 @@ class OferecimentoController extends Controller {
     }
 
 
-    public function actions_index(){
-        
+    public function actions_index() {
+
     }
 
-    public function actions_view(){
+    public function actions_view() {
         $grupo = $this->loadGrupo();
         $model = $this->loadModel();
         $array_actions = array(
-            'admin'=>array(
-                CHtml::link('Listar oferecimentos',array('index')),
-                CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
-                CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
-            ),
-            'guest'=>array(),
-            'professor'=>array(),
-            'gestoracademico'=>array(
-                CHtml::link('Listar oferecimentos',array('index')),
-                CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
-                CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
-            ),
-            'aluno'=>array(
-                CHtml::link('Listar oferecimentos',array('index')),
-            ),
-            'bibliotecario'=>array(),
+                'admin'=>array(
+                        CHtml::link('Listar oferecimentos',array('index')),
+                        CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
+                        CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
+                ),
+                'guest'=>array(),
+                'professor'=>array(),
+                'gestoracademico'=>array(
+                        CHtml::link('Listar oferecimentos',array('index')),
+                        CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
+                        CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
+                ),
+                'aluno'=>array(
+                        CHtml::link('Listar oferecimentos',array('index')),
+                ),
+                'bibliotecario'=>array(),
         );
         return $array_actions[$grupo];
     }
