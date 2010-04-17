@@ -50,9 +50,22 @@ class OferecimentoController extends Controller {
      * Displays a particular model.
      */
     public function actionView() {
+
+        $model = $this->loadModel();
+        $disciplina = disciplina::model()->findByPk($model->id_disciplina);
+        $professor = professor::model()->findByPk($disciplina->id_professor_responsavel);
+        $horario = horario::model()->find('id_oferecimento = ' . $model->id_oferecimento);
+
+        $data = $model->attributes;
+
+        $data['disciplina'] = $disciplina->nome;
+        $data['professor'] = $professor->nome;
+        $data['id_disciplina'] = $disciplina->id_disciplina;
+        $data['dia'] = $horario->dia;
         $this->render('view',array(
-                'model'=>$this->loadModel(),
+                'data'=>$data,
                 'actions'=>$this->actions_view(),
+                'model'=>$model,
         ));
     }
 
