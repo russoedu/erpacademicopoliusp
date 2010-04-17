@@ -13,14 +13,59 @@ $this->breadcrumbs=array(
         echo "<li/>";
     } ?>
 </ul><!-- actions -->
+<?php
+    $dias = array(
+                'SEGUNDA'=>'Segunda-feira',
+                'TERÇA'=>'Terça-feira',
+                'QUARTA'=>'Quarta-feira',
+                'QUINTA'=>'Quinta-feira',
+                'SEXTA'=>'Sexta-feira',
+        );
+    ?>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
+	'data'=>$data,
 	'attributes'=>array(
-		'id_turma',
-		'id_sala',
-		'data_inicio',
-		'data_fim',
-		'vagas',
+                array(
+                    'label'=>'Disciplina',
+                    'type'=>'raw',
+                    'value'=>CHtml::link($data['disciplina'],array('/cursos/disciplina/view', 'id'=>$data['id_disciplina'])),
+                ),
+                array(
+                    'label'=>'Professor Responsável pelo Oferecimento',
+                    'type'=>'raw',
+                    'value'=>$data['professor'],
+                ),
+                array(
+                    'label'=>'Turma',
+                    'type'=>'raw',
+                    'value'=>$data['id_turma'],
+                ),
+                array(
+                    'label'=>'Sala',
+                    'type'=>'raw',
+                    'value'=>$data['id_sala'],
+                ),
+                array(
+                    'label'=>'Dia da semana',
+                    'type'=>'raw',
+                    'value'=>$dias[$data['dia']],
+                ),
+                array(
+                    'label'=>'Data de início',
+                    'type'=>'raw',
+                    'value'=>date('d/m/Y', strtotime($data['data_inicio'])) ,
+                ),
+                array(
+                    'label'=>'Data de fim',
+                    'type'=>'raw',
+                    'value'=>date('d/m/Y', strtotime($data['data_fim'])) ,
+                ),
+		array(
+                    'label'=> 'Vagas do oferecimento',
+                    'type'=>'raw',
+                    'value'=>$data['vagas'],
+                ),
 	),
+        
 )); ?>
