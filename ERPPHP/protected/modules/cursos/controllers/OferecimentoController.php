@@ -33,7 +33,7 @@ class OferecimentoController extends Controller {
                         'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                        'actions'=>array('create','update'),
+                        'actions'=>array('create','update','oferecimentoDisponivel'),
                         'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -232,4 +232,58 @@ class OferecimentoController extends Controller {
         return $array_actions[$grupo];
     }
 
+    public function actionOferecimentoDisponivel(){
+        if(isset($_REQUEST['id_aluno'])){
+            $aluno=aluno::model()->findByPk($_REQUEST['id_aluno']);
+            $curso_aluno_array=curso_aluno::model()->findAllBySql("SELECT * FROM curso_aluno WHERE id_aluno = :id_aluno", array(':id_aluno'=>$aluno->id_aluno));
+            $oferecimentos=array();
+            foreach($curso_aluno_array as $curso_aluno){
+                if($curso_aluno != "FORMADO"){
+                    $semestre_atual=(int)date("m") > 6 ? 2 : 1;
+                    $ano_cursando=(int)date('Y') - (int)$curso_aluno->ano_inicio + 1;
+                    $semestre_cursando = 0;
+
+                    if($ano_cursando != 0){
+                        $semestre_cursando=$curso_aluno->semestre_inicio == 'PRIMEIRO' ?
+                                $ano_cursando*2 - $semestre_atual : $ano_cursando*2 - $semestre_atual%2 - 1;
+                    }
+
+                    $disciplinas=disciplina::model()->findAllBySql("SELECT * FROM disciplina WHERE id_curso = :id_curso AND semestre = :semestre",
+                            array(':id_curso'=>$curso_aluno->id_curso, ':semestre'=>$semestre_cursando));
+
+                    foreach($disciplinas as $disciplina){
+                        $sql = "SELECT * FROM oferecimento " .
+                            "WHERE id_disciplina = " . $disciplina->id_disciplina .
+                                " AND YEAR(data_inicio) = " . (int)date("Y") .
+                                " AND MONTH(data_inicio) BETWEEN " . ($semestre_atual = 1? 0 : 7) .
+                                " AND " . ($semestre_atual = 1? 6 : 12);
+
+                        $temp=oferecimento::model()->findAllBySql($sql);
+
+                        $oferecimentos = $oferecimentos + $temp;
+                    }
+                }
+            }
+
+            $dataProvider=new CActiveDataProvider('Oferecimento', array(
+                'pagination'=>array(
+                    'pageSize'=>20,
+                ),
+            ));
+
+            $dataProvider->setData($oferecimentos);
+
+            $this->render('oferecimentoDisponivel',array(
+                    'dataProvider'=>$dataProvider,
+            ));
+        }
+    }
+
+    public function actionInscricaoOferecimento(){
+        if(isset($_REQUEST['id_aluno']) && isset($_REQUEST['id_oferecimento'])){
+            //TODO
+            $oferecimento_aluno= new $oferecimento_aluno;
+        }
+
+    }
 }

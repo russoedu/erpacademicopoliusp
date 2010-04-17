@@ -13,6 +13,8 @@ class CursosModule extends CWebModule
 			'cursos.components.*',
                         'alunos.models.*',
                         'alunos.components.*',
+                        'user.models.*',
+                        'user.components.*',
 		));
 	}
 
