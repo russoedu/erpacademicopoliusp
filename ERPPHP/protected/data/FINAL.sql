@@ -160,7 +160,7 @@ CREATE TABLE `disciplina` (
   PRIMARY KEY (`id_disciplina`),
   KEY `fk_Disciplina_Curso` (`id_curso`),
   KEY `fk_Disciplina_Professor1` (`id_professor_responsavel`),
-  CONSTRAINT `fk_Disciplina_Curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Disciplina_Curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id_curso`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_Disciplina_Professor1` FOREIGN KEY (`id_professor_responsavel`) REFERENCES `professor` (`id_professor`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
