@@ -47,10 +47,13 @@ class DisciplinaController extends Controller {
      * Displays a particular model.
      */
     public function actionView() {
-
-
+        $model = $this->loadModel();
+        $data = $model->attributes;
+        $professor = professor::model()->findByPk($model->id_professor_responsavel);
+        $data['professor']=$professor->nome;
         $this->render('view',array(
-                'model'=>$this->loadModel(),
+                'model'=>$model,
+                'data'=>$data,
                 'actions'=>$this->actions_view(),
         ));
     }
