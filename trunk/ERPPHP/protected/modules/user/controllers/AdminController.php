@@ -165,7 +165,8 @@ class AdminController extends Controller
                 // POG: devia ser checado se já há alguém
                 'username' => $username,
                 'firstname' => $splitted_name[0],
-                'lastname' => $splitted_name[1],
+                'lastname' => (length($splitted_name)>1)? $splitted_name[1]:"",
+
             );
         }
 
