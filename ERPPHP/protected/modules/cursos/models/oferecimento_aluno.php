@@ -61,7 +61,7 @@ class oferecimento_aluno extends CActiveRecord
 			'id_oferecimento' => 'Id Oferecimento',
 			'id_aluno' => 'Id Aluno',
 			'nota_final' => 'Nota Final',
-			'frequencia_final' => 'Frequencia Final',
+			'frequencia_final' => 'Frequência Final',
 			'aprovado' => 'Aprovado',
 		);
 	}

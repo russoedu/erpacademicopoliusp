@@ -33,7 +33,7 @@ class OferecimentoController extends Controller {
                         'users'=>array('*'),
                 ),
                 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                        'actions'=>array('create','update','oferecimentoDisponivel'),
+                        'actions'=>array('create','update','oferecimentoDisponivel','InscricaoOferecimento','MeusOferecimentos'),
                         'users'=>array('@'),
                 ),
                 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -230,8 +230,10 @@ class OferecimentoController extends Controller {
                         ),
         ));
 
+        $actions=$this->actions_index();
+
         $this->render('index',array(
-                'dataProvider'=>$dataProvider,
+              'dataProvider'=>$dataProvider,'actions'=>$actions,
         ));
     }
 
@@ -276,8 +278,34 @@ class OferecimentoController extends Controller {
     }
 
 
-    public function actions_index() {
+    /**
+     * retorna o id do aluno na tabela específica
+     */
+    public function getIdAluno($grupo){
+        $id = null;
+        if($grupo == 'aluno'){
+            $tbl_user_id = Yii::App()->user->id;
+            $aluno = aluno::model()->find('tbl_users_id=' . $tbl_user_id);
+            $id = $aluno->id_aluno;
+        }       
+        return $id;
+        
+    }
 
+    public function actions_index() {
+        $grupo = $this->loadGrupo();
+        $array_actions = array(
+                'admin'=>array(),
+                'guest'=>array(),
+                'professor'=>array(),
+                'gestoracademico'=>array(),
+                'aluno'=>array(
+                    CHtml::link('Oferecimentos Disponíveis',array('OferecimentoDisponivel','id_aluno'=>$this->getIdAluno($grupo))),
+                    CHtml::link('Meus Oferecimentos',array('MeusOferecimentos','id_aluno'=>$this->getIdAluno($grupo))),
+                ),
+                'bibliotecario'=>array(),
+        );
+        return $array_actions[$grupo];
     }
 
     public function actions_view() {
@@ -285,14 +313,12 @@ class OferecimentoController extends Controller {
         $model = $this->loadModel();
         $array_actions = array(
                 'admin'=>array(
-                        CHtml::link('Listar oferecimentos',array('index')),
                         CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
                         CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
                 ),
                 'guest'=>array(),
                 'professor'=>array(),
                 'gestoracademico'=>array(
-                        CHtml::link('Listar oferecimentos',array('index')),
                         CHtml::link('Atualizar oferecimento',array('update','id'=>$model->id_oferecimento)),
                         CHtml::linkButton('Deletar oferecimento',array('submit'=>array('delete','id'=>$model->id_oferecimento),'confirm'=>'Você tem certeza que deseja deletar?')),
                 ),
@@ -346,16 +372,46 @@ class OferecimentoController extends Controller {
             $dataProvider->setData($oferecimentos);
 
             $this->render('oferecimentoDisponivel',array(
-                    'dataProvider'=>$dataProvider,
+                    'dataProvider'=>$dataProvider, 'aluno'=>$aluno,
             ));
         }
     }
 
     public function actionInscricaoOferecimento(){
         if(isset($_REQUEST['id_aluno']) && isset($_REQUEST['id_oferecimento'])){
-            //TODO
-            $oferecimento_aluno= new $oferecimento_aluno;
-        }
+            $oferecimento_aluno= new oferecimento_aluno;
+            $oferecimento_aluno->id_aluno = $_REQUEST['id_aluno'];
+            $oferecimento_aluno->id_oferecimento = $_REQUEST['id_oferecimento'];
 
+            $oferecimento=oferecimento::model()->findByPk($_REQUEST['id_oferecimento']);
+            $oferecimento->vagas = $oferecimento->vagas - 1;
+
+            if($oferecimento->save() && $oferecimento_aluno->save())
+                $this->redirect(array('view','id'=>$oferecimento->id_oferecimento));
+
+        }
     }
+    
+    public function actionMeusOferecimentos(){
+        if(isset($_REQUEST['id_aluno']))
+        {
+            $aluno=aluno::model()->findByPk($_REQUEST['id_aluno']);
+
+            $oferecimento_aluno_array=oferecimento_aluno::model()->findAllBySQL("SELECT * FROM oferecimento_aluno WHERE id_aluno = " . $aluno->id_aluno);
+
+            $dataProvider=new CActiveDataProvider('Oferecimento_Aluno', array(
+                'pagination'=>array(
+                    'pageSize'=>20,
+                ),
+            ));
+
+            $dataProvider->setData($oferecimento_aluno_array);
+
+            $this->render('MeusOferecimentos',array(
+                    'dataProvider'=>$dataProvider, 'aluno'=>$aluno,
+            ));
+        }
+    }
+
+
 }
