@@ -84,7 +84,7 @@ class AdminController extends Controller
 
                 // Gestores Acadêmicos
                 $all_gestores = gestoracademico::model()->findAll();
-                $gestores_hash_list = $this->getEmployersJSONList('Gestores Acadêmico');
+                $gestores_hash_list = $this->getEmployersJSONList('Gestor Acadêmico');
                 assert(is_array($gestores_hash_list));
                 $this->syncDb($all_gestores, $gestores_hash_list, 'g');
         }
@@ -111,8 +111,10 @@ class AdminController extends Controller
                                 break;
                         }
                         assert($id != null);
+
+
                         // verifica se o funcionário ainda existe no rh. Se existir: atualiza seus atributos
-                        if ($id == $employeers_hash[$i]->employee->id) {
+                        if (isset($employeers_hash[$i]) && $id == $employeers_hash[$i]->employee->id) {
                             $current_register->nome = $employeers_hash[$i]->employee->name;
                             // @TODO: atualizar o resto dos atributos do funcionário
                             $current_register->save();
@@ -126,14 +128,14 @@ class AdminController extends Controller
                     if (!$found) {
                         $rf = RegistrationForm::model()->find("id=" . $current_register->tbl_users_id);
                         $profile = Profile::model()->findByPk($rf->id);
-                        
+
                         $current_register->delete();
-                        $profile->delete();                        
+                        $profile->delete();
                         $rf->delete();
                     }
                 }
-                // $employeers_hash só tem os novos funcionários que devem
-                // ser inseridos no banco
+                 //$employeers_hash só tem os novos funcionários que devem
+                 //ser inseridos no banco
                 foreach($employeers_hash as $new_employeer) {
                     $this->addNewEmployeer($new_employeer->employee->name,
                             $new_employeer->employee->id, $employeersType);
@@ -156,6 +158,9 @@ class AdminController extends Controller
             $username = ereg_replace("[óòôõº]","o",$username);
             $username = ereg_replace("[úùû]","u",$username);
             $username = str_replace("ç","c",$username);
+
+            
+            
             return array(
                 // POG: devia ser checado se já há alguém
                 'username' => $username,
