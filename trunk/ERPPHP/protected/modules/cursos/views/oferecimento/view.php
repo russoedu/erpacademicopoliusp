@@ -44,7 +44,7 @@ $this->breadcrumbs=array(
                 array(
                     'label'=>'Sala',
                     'type'=>'raw',
-                    'value'=>$data['id_sala'],
+                    'value'=>$data['sala'],
                 ),
                 array(
                     'label'=>'Dia da semana',

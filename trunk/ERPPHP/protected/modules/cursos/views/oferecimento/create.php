@@ -13,4 +13,5 @@ $this->breadcrumbs=array(
 array('model'=>$model,
 'professores'=>$professores,
 'diaSemana'=>$diaSemana,
+'salas'=>$salas,
 )); ?>

@@ -21,7 +21,14 @@
 
     <div class="row">
         <?php echo CHtml::activeLabelEx($model,'id_sala'); ?>
-        <?php echo CHtml::activeTextField($model,'id_sala'); ?>
+        <?php 
+            if($model->isNewRecord){
+                echo CHtml::activeDropDownList($model, 'id_sala', $salas);
+                }
+            else{
+                echo $salas[$model->id_sala];
+            }
+        ?>
         <?php echo CHtml::error($model,'id_sala'); ?>
     </div>
 
