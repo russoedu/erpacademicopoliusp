@@ -82,12 +82,14 @@ class OferecimentoController extends Controller {
         $professores_temp = Yii::App()->getModule('user')->getProfessores();
         $professores = array();
 
-//        $client = new SoapClient('http://143.107.102.57:51849/Service1.asmx');
+        $client_soap = new SoapClient('http://143.107.102.3:9595/Service1.asmx?WSDL');
         
         //Deveria pegar aqui o que o outro grupo deveria ter feito...
         $salas = $this->simula_Sala();
 
+        $recursos = $client_soap->getRecursos();
 
+        print_r($recursos);
 
         foreach ($professores_temp as $professor) {
             $professores[$professor->id_professor]=$professor->nome;
@@ -153,9 +155,13 @@ class OferecimentoController extends Controller {
         );
 
         $n_dia_semana = $equivalencia[$dia_semana];
-        $n_dia_semana_atual =date('w',strtotime($inicio));
-//        while($n_dia_semana != $n_dia_semana_atual)
-        
+        $dia_atual = $inicio;
+        $n_dia_semana_atual =date('w',strtotime($dia_atual));
+        while($n_dia_semana != $n_dia_semana_atual){
+            $dia_atual = date("Y/m/d",strtotime(date("Y-m-d", strtotime($dia_atual)) . " +1 day"));
+            $n_dia_semana_atual =date('w',strtotime($dia_atual));
+        }
+        echo $dia_atual;
     }
 
     /**
