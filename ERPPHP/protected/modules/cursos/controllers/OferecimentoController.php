@@ -82,14 +82,21 @@ class OferecimentoController extends Controller {
         $professores_temp = Yii::App()->getModule('user')->getProfessores();
         $professores = array();
 
-        $client_soap = new SoapClient('http://143.107.102.3:9595/Service1.asmx?WSDL');
-        
-        //Deveria pegar aqui o que o outro grupo deveria ter feito...
+//        $client_soap = new SoapClient('http://143.107.102.3:9595/Service1.asmx?WSDL');
+//
         $salas = $this->simula_Sala();
-
-        $recursos = $client_soap->getRecursos();
-
-        print_r($recursos);
+//
+//        $recursos = $client_soap->getRecursos();
+//
+//        $disponivel = $client_soap->verificarDisponibilidadeRetornavel($idRecurso='3',$dtInicio='20-04-2010',$dtFim='21-04-2010');
+//        print_r($disponivel);
+//        $disponivel = $client_soap->alocarRetornavel($idRecurso='4',$dtInicio='2010-04-20',$dtFim='2010-04-21');
+//        print_r($disponivel);
+//        echo '<br/>';
+//        $recursos = $recursos->getRecursosResult;
+//        print_r($recursos);
+//        $recursos = $recursos->any;
+//        print_r($recursos);
 
         foreach ($professores_temp as $professor) {
             $professores[$professor->id_professor]=$professor->nome;
@@ -112,10 +119,10 @@ class OferecimentoController extends Controller {
                         'horario_fim' =>'5:00:00',
                 );
                 $horario->attributes = $horario_data;
+                $reservar = $this->gera_datas($model->data_inicio, $model->data_fim, $horario->dia);
 
                 $horario->save();
-                $this->gera_datas($model->data_inicio, $model->data_fim, $horario->dia);
-//                $this->redirect(array('view','id'=>$model->id_oferecimento));
+                $this->redirect(array('view','id'=>$model->id_oferecimento));
             }
         }
 
@@ -132,12 +139,8 @@ class OferecimentoController extends Controller {
 
     public function simula_Sala(){
         return array(
-            '1'=>'Sala1',
-            '2'=>'Sala2',
-            '3'=>'Sala3',
-            '4'=>'Sala4',
-            '5'=>'Sala5',
-            '6'=>'Sala6',
+            '3'=>'B2-06',
+            '4'=>'B2-08',
         );
     }
 
@@ -153,7 +156,6 @@ class OferecimentoController extends Controller {
             'QUINTA'=>4,
             'SEXTA'=>5,
         );
-
         $n_dia_semana = $equivalencia[$dia_semana];
         $dia_atual = $inicio;
         $n_dia_semana_atual =date('w',strtotime($dia_atual));
@@ -161,7 +163,14 @@ class OferecimentoController extends Controller {
             $dia_atual = date("Y/m/d",strtotime(date("Y-m-d", strtotime($dia_atual)) . " +1 day"));
             $n_dia_semana_atual =date('w',strtotime($dia_atual));
         }
-        echo $dia_atual;
+        $dias = array();
+        while(strtotime($dia_atual) < strtotime($fim)){
+            $dias[] =$dia_atual;
+            $dia_atual = date("Y/m/d",strtotime(date("Y-m-d", strtotime($dia_atual)) . " +1 week"));
+        }
+
+        print_r($dias);
+        
     }
 
     /**
