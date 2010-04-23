@@ -29,5 +29,5 @@
 	<?php echo CHtml::encode($data->vagas); ?>
 	<br />
 
-        <?php echo CHtml::link("Inscrever-se", array('inscricaoOferecimento', 'id_aluno'=>$data->id_aluno, 'id_oferecimento'=>$data->id_oferecimento)); ?>
+        <?php echo CHtml::link("Inscrever-se", array('inscricaoOferecimento', 'id_aluno'=>$aluno->id_aluno, 'id_oferecimento'=>$data->id_oferecimento)); ?>
 </div>
