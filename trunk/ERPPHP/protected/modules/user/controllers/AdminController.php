@@ -150,13 +150,13 @@ class AdminController extends Controller
          * @return <type>
          */
         private function generateNewUserInfo($name) {
-            $splitted_name = split(" ", $name);
+            $splitted_name = preg_split("/[\s,]+/", $name);
 
             $username = strtolower($splitted_name[0] . $splitted_name[count($splitted_name) - 1]);
-            $username = ereg_replace("[áàâãª]","a",$username);
-            $username = ereg_replace("[éèê]","e",$username);
-            $username = ereg_replace("[óòôõº]","o",$username);
-            $username = ereg_replace("[úùû]","u",$username);
+            $username = preg_replace("[áàâãª]","a",$username);
+            $username = preg_replace("[éèê]","e",$username);
+            $username = preg_replace("[óòôõº]","o",$username);
+            $username = preg_replace("[úùû]","u",$username);
             $username = str_replace("ç","c",$username);
 
             
@@ -165,7 +165,7 @@ class AdminController extends Controller
                 // POG: devia ser checado se já há alguém
                 'username' => $username,
                 'firstname' => $splitted_name[0],
-                'lastname' => $splitted_name[1],
+                'lastname' => "pog",
             );
         }
 

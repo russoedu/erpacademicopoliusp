@@ -55,7 +55,7 @@
     <div class="row">
         <?php echo CHtml::activeLabelEx($model,'data_fim'); ?>
         <?php $today = date("Y-m-d");// current date
-        $model->data_fim = date("Y/m/d",strtotime(date("Y-m-d", strtotime($today)) . " +6 months"));
+        $model->data_fim = date("Y/m/d",strtotime(date("Y-m-d", strtotime($today)) . " +1 day"));
         $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                 'id'=>'dpDataFim',
                 'model'=>$model,
@@ -86,7 +86,7 @@
                 'SEXTA'=>'Sexta-feira',
         );
         if ($model->isnewRecord) {
-            $selected = 'SEGUNDA';
+            $selected = 'SEXTA';
             if(isset($diaSemana)) {
                 $selected = $diaSemana;
             }
