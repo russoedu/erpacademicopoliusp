@@ -160,12 +160,13 @@ class AdminController extends Controller
             $username = str_replace("ç","c",$username);
 
             
-            
+
+
             return array(
                 // POG: devia ser checado se já há alguém
                 'username' => $username,
                 'firstname' => $splitted_name[0],
-                'lastname' => (length($splitted_name)>1)? $splitted_name[1]:"",
+                'lastname' => ($splitted_name->length > 1)? $splitted_name[1]:"",
 
             );
         }
