@@ -13,5 +13,6 @@ $this->breadcrumbs=array(
 
 <?php echo $this->renderPartial('_form', array('model'=>$model
         , 'professores'=>$professores,
-        'diaSemana'=>$diaSemana
+        'diaSemana'=>$diaSemana,
+        'salas'=>$salas,
     )); ?>

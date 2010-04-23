@@ -56,12 +56,14 @@ class OferecimentoController extends Controller {
         $professor = professor::model()->findByPk($disciplina->id_professor_responsavel);
         $horario = horario::model()->find('id_oferecimento = ' . $model->id_oferecimento);
 
+        $salas = $this->simula_sala();
         $data = $model->attributes;
 
         $data['disciplina'] = $disciplina->nome;
         $data['professor'] = $professor->nome;
         $data['id_disciplina'] = $disciplina->id_disciplina;
         $data['dia'] = $horario->dia;
+        $data['sala'] = $salas[$model->id_sala];
         $this->render('view',array(
                 'data'=>$data,
                 'actions'=>$this->actions_view(),
@@ -79,6 +81,14 @@ class OferecimentoController extends Controller {
         $id_disciplina = $_REQUEST['id_disciplina'];
         $professores_temp = Yii::App()->getModule('user')->getProfessores();
         $professores = array();
+
+//        $client = new SoapClient('http://143.107.102.57:51849/Service1.asmx');
+        
+        //Deveria pegar aqui o que o outro grupo deveria ter feito...
+        $salas = $this->simula_Sala();
+
+
+
         foreach ($professores_temp as $professor) {
             $professores[$professor->id_professor]=$professor->nome;
         }
@@ -102,7 +112,8 @@ class OferecimentoController extends Controller {
                 $horario->attributes = $horario_data;
 
                 $horario->save();
-                $this->redirect(array('view','id'=>$model->id_oferecimento));
+                $this->gera_datas($model->data_inicio, $model->data_fim, $horario->dia);
+//                $this->redirect(array('view','id'=>$model->id_oferecimento));
             }
         }
 
@@ -110,9 +121,41 @@ class OferecimentoController extends Controller {
                 'model'=>$model,
                 'professores'=>$professores,
                 'diaSemana'=>$diaSemana,
+                'salas'=>$salas,
         ));
 
 
+    }
+
+
+    public function simula_Sala(){
+        return array(
+            '1'=>'Sala1',
+            '2'=>'Sala2',
+            '3'=>'Sala3',
+            '4'=>'Sala4',
+            '5'=>'Sala5',
+            '6'=>'Sala6',
+        );
+    }
+
+    public function verifica_disponibilidade($id_sala, $dia){
+        
+    }
+
+    public function gera_datas($inicio , $fim , $dia_semana){
+        $equivalencia = array(
+            'SEGUNDA'=>1,
+            'TERÇA'=>2,
+            'QUARTA'=>3,
+            'QUINTA'=>4,
+            'SEXTA'=>5,
+        );
+
+        $n_dia_semana = $equivalencia[$dia_semana];
+        $n_dia_semana_atual =date('w',strtotime($inicio));
+//        while($n_dia_semana != $n_dia_semana_atual)
+        
     }
 
     /**
@@ -122,7 +165,7 @@ class OferecimentoController extends Controller {
     public function actionUpdate() {
         $model=$this->loadModel();
         $horario = horario::model()->find('id_oferecimento = ' . $model->id_oferecimento);
-        
+        $salas = $this->simula_Sala();
         $professores_temp = Yii::App()->getModule('user')->getProfessores();
         $professores = array();
         foreach ($professores_temp as $professor) {
@@ -141,6 +184,7 @@ class OferecimentoController extends Controller {
                 'model'=>$model,
                 'professores'=>$professores,
                 'diaSemana'=>$horario->dia,
+                'salas'=>$salas,
         ));
     }
 
